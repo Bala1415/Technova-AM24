@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "domain": "programming",
+    "title": "Two Sum",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/two-sum/",
+    "frequency": "Very High",
+    "companies": ["Google", "Amazon", "Apple", "Microsoft", "Facebook"],
+    "topics": ["Array", "Hash Table"],
+    "acceptanceRate": 49.5,
+    "description": "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target."
+  },
+  {
+    "id": 2,
+    "domain": "programming",
+    "title": "Valid Parentheses",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/valid-parentheses/",
+    "frequency": "Very High",
+    "companies": ["Amazon", "Microsoft", "Bloomberg"],
+    "topics": ["Stack", "String"],
+    "acceptanceRate": 40.2,
+    "description": "Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid."
+  },
+  {
+    "id": 3,
+    "domain": "programming",
+    "title": "Merge Two Sorted Lists",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/merge-two-sorted-lists/",
+    "frequency": "High",
+    "companies": ["Amazon", "Microsoft", "Apple"],
+    "topics": ["Linked List", "Recursion"],
+    "acceptanceRate": 61.8,
+    "description": "Merge two sorted linked lists and return it as a sorted list."
+  },
+  {
+    "id": 4,
+    "domain": "programming",
+    "title": "Best Time to Buy and Sell Stock",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
+    "frequency": "Very High",
+    "companies": ["Amazon", "Google", "Facebook"],
+    "topics": ["Array", "Dynamic Programming"],
+    "acceptanceRate": 54.3,
+    "description": "Find the maximum profit you can achieve from buying and selling stock."
+  },
+  {
+    "id": 5,
+    "domain": "programming",
+    "title": "Reverse Linked List",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/reverse-linked-list/",
+    "frequency": "Very High",
+    "companies": ["Amazon", "Microsoft", "Apple", "Google"],
+    "topics": ["Linked List", "Recursion"],
+    "acceptanceRate": 72.1,
+    "description": "Reverse a singly linked list."
+  },
+  {
+    "id": 6,
+    "domain": "programming",
+    "title": "LRU Cache",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/lru-cache/",
+    "frequency": "Very High",
+    "companies": ["Amazon", "Google", "Facebook", "Microsoft"],
+    "topics": ["Hash Table", "Linked List", "Design"],
+    "acceptanceRate": 41.2,
+    "description": "Design a data structure that follows the constraints of a Least Recently Used (LRU) cache."
+  },
+  {
+    "id": 7,
+    "domain": "programming",
+    "title": "3Sum",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/3sum/",
+    "frequency": "High",
+    "companies": ["Amazon", "Facebook", "Google"],
+    "topics": ["Array", "Two Pointers", "Sorting"],
+    "acceptanceRate": 32.4,
+    "description": "Given an integer array nums, return all the triplets that sum up to zero."
+  },
+  {
+    "id": 8,
+    "domain": "ai",
+    "title": "Design Add and Search Words Data Structure",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/design-add-and-search-words-data-structure/",
+    "frequency": "High",
+    "companies": ["Google", "Amazon", "Facebook"],
+    "topics": ["Trie", "Design", "String"],
+    "acceptanceRate": 45.2,
+    "description": "Design a data structure that supports adding new words and finding if a string matches any previously added string."
+  },
+  {
+    "id": 9,
+    "domain": "ai",
+    "title": "Word Break",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/word-break/",
+    "frequency": "High",
+    "companies": ["Google", "Amazon", "Microsoft"],
+    "topics": ["Dynamic Programming", "String"],
+    "acceptanceRate": 44.8,
+    "description": "Given a string s and a dictionary of strings wordDict, return true if s can be segmented into a space-separated sequence of dictionary words."
+  },
+  {
+    "id": 10,
+    "domain": "data-science",
+    "title": "Running Sum of 1d Array",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/running-sum-of-1d-array/",
+    "frequency": "High",
+    "companies": ["Amazon", "Google"],
+    "topics": ["Array", "Prefix Sum"],
+    "acceptanceRate": 88.9,
+    "description": "Given an array nums, return the running sum of nums."
+  }
+]

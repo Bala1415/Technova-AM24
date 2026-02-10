@@ -1,0 +1,291 @@
+[
+  {
+    "id": 1,
+    "domain": "ai",
+    "topic": "Machine Learning Basics",
+    "difficulty": "easy",
+    "question": "What is machine learning?",
+    "options": [
+      "A programming language",
+      "A subset of artificial intelligence that enables computers to learn without being explicitly programmed",
+      "A type of database",
+      "A web development framework"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Machine learning is a subset of AI that allows computers to automatically learn and improve from experience without being explicitly programmed.",
+    "resources": {
+      "video": "https://www.youtube.com/watch?v=ukzFI9rgwfU",
+      "article": "https://www.ibm.com/cloud/learn/machine-learning"
+    },
+    "tags": ["ml", "basics", "definition"]
+  },
+  {
+    "id": 2,
+    "domain": "ai",
+    "topic": "Neural Networks",
+    "difficulty": "medium",
+    "question": "Which activation function is commonly used in the output layer for binary classification?",
+    "options": [
+      "ReLU",
+      "Sigmoid",
+      "Tanh",
+      "Linear"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Sigmoid function is commonly used in the output layer for binary classification as it maps any real number to a value between 0 and 1.",
+    "resources": {
+      "article": "https://www.analyticsvidhya.com/blog/2017/10/fundamentals-deep-learning-activation-functions-when-to-use-them/"
+    },
+    "tags": ["neural-networks", "activation-functions"]
+  },
+  {
+    "id": 3,
+    "domain": "ai",
+    "topic": "Deep Learning",
+    "difficulty": "hard",
+    "question": "What is the vanishing gradient problem in deep neural networks?",
+    "options": [
+      "When gradients become too large during backpropagation",
+      "When gradients become increasingly small as they propagate back through layers",
+      "When the network fails to converge",
+      "When the loss function becomes zero"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The vanishing gradient problem occurs when gradients become exponentially small as they propagate backward through many layers, making it difficult for early layers to learn effectively.",
+    "resources": {
+      "article": "https://www.analyticsvidhya.com/blog/2021/06/the-challenge-of-vanishing-exploding-gradients-in-deep-neural-networks/"
+    },
+    "tags": ["deep-learning", "gradients", "backpropagation"]
+  },
+  {
+    "id": 4,
+    "domain": "programming",
+    "topic": "Data Structures",
+    "difficulty": "easy",
+    "question": "What is the time complexity of accessing an element in an array by index?",
+    "options": [
+      "O(n)",
+      "O(log n)",
+      "O(1)",
+      "O(n²)"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Array access by index is O(1) or constant time because arrays provide direct access to elements using their memory address.",
+    "resources": {
+      "website": "https://www.geeksforgeeks.org/array-data-structure/",
+      "course": "https://www.coursera.org/learn/algorithms-part1"
+    },
+    "tags": ["arrays", "time-complexity", "data-structures"]
+  },
+  {
+    "id": 5,
+    "domain": "programming",
+    "topic": "Algorithms",
+    "difficulty": "medium",
+    "question": "Which sorting algorithm has the best average case time complexity?",
+    "options": [
+      "Bubble Sort",
+      "Selection Sort",
+      "Quick Sort",
+      "Insertion Sort"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Quick Sort has an average time complexity of O(n log n), which is optimal for comparison-based sorting algorithms.",
+    "resources": {
+      "youtube": "https://www.youtube.com/results?search_query=quicksort+algorithm",
+      "website": "https://www.geeksforgeeks.org/quick-sort/"
+    },
+    "tags": ["sorting", "algorithms", "quicksort"]
+  },
+  {
+    "id": 6,
+    "domain": "programming",
+    "topic": "Object-Oriented Programming",
+    "difficulty": "hard",
+    "question": "What is the difference between composition and inheritance?",
+    "options": [
+      "There is no difference",
+      "Composition is 'has-a' relationship, inheritance is 'is-a' relationship",
+      "Inheritance is 'has-a' relationship, composition is 'is-a' relationship",
+      "Both represent the same type of relationship"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Composition represents a 'has-a' relationship where objects contain other objects, while inheritance represents an 'is-a' relationship where classes extend other classes.",
+    "resources": {
+      "article": "https://www.geeksforgeeks.org/difference-between-inheritance-and-composition-in-java/"
+    },
+    "tags": ["oop", "composition", "inheritance"]
+  },
+  {
+    "id": 7,
+    "domain": "data-science",
+    "topic": "Statistics",
+    "difficulty": "easy",
+    "question": "What does the mean represent in a dataset?",
+    "options": [
+      "The most frequently occurring value",
+      "The middle value when data is sorted",
+      "The average of all values",
+      "The difference between max and min values"
+    ],
+    "correctAnswer": 2,
+    "explanation": "The mean is the arithmetic average of all values in a dataset, calculated by summing all values and dividing by the number of values.",
+    "resources": {
+      "article": "https://www.khanacademy.org/math/statistics-probability/summarizing-quantitative-data"
+    },
+    "tags": ["statistics", "descriptive-statistics", "mean"]
+  },
+  {
+    "id": 8,
+    "domain": "data-science",
+    "topic": "Data Visualization",
+    "difficulty": "medium",
+    "question": "Which type of chart is best for showing the relationship between two continuous variables?",
+    "options": [
+      "Bar chart",
+      "Pie chart",
+      "Scatter plot",
+      "Histogram"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Scatter plots are ideal for visualizing the relationship between two continuous variables, showing correlation patterns and potential trends.",
+    "resources": {
+      "website": "https://www.tableau.com/learn/articles/data-visualization"
+    },
+    "tags": ["data-visualization", "scatter-plot", "continuous-variables"]
+  },
+  {
+    "id": 9,
+    "domain": "data-science",
+    "topic": "Machine Learning",
+    "difficulty": "hard",
+    "question": "What is the curse of dimensionality?",
+    "options": [
+      "When datasets have too few features",
+      "When algorithms run too slowly",
+      "When the performance of algorithms degrades as the number of dimensions increases",
+      "When data has missing values"
+    ],
+    "correctAnswer": 2,
+    "explanation": "The curse of dimensionality refers to various phenomena that arise when analyzing data in high-dimensional spaces, where algorithms become less effective as the number of dimensions increases.",
+    "resources": {
+      "article": "https://towardsdatascience.com/the-curse-of-dimensionality-50dc6e49aa1e"
+    },
+    "tags": ["machine-learning", "dimensionality", "feature-engineering"]
+  },
+  {
+    "id": 10,
+    "domain": "web-development",
+    "topic": "HTML/CSS",
+    "difficulty": "easy",
+    "question": "What does HTML stand for?",
+    "options": [
+      "Hyper Text Markup Language",
+      "High Tech Modern Language",
+      "Home Tool Markup Language",
+      "Hyperlink and Text Markup Language"
+    ],
+    "correctAnswer": 0,
+    "explanation": "HTML stands for HyperText Markup Language, which is the standard markup language for creating web pages.",
+    "resources": {
+      "website": "https://www.w3schools.com/html/",
+      "course": "https://www.codecademy.com/learn/learn-html"
+    },
+    "tags": ["html", "web-basics", "markup"]
+  },
+  {
+    "id": 11,
+    "domain": "web-development",
+    "topic": "JavaScript",
+    "difficulty": "medium",
+    "question": "What is the difference between '==' and '===' in JavaScript?",
+    "options": [
+      "No difference",
+      "'==' checks type and value, '===' checks only value",
+      "'==' checks only value, '===' checks type and value",
+      "Both are deprecated"
+    ],
+    "correctAnswer": 2,
+    "explanation": "'==' performs type coercion and compares values, while '===' performs strict comparison checking both type and value without coercion.",
+    "resources": {
+      "article": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness"
+    },
+    "tags": ["javascript", "equality", "type-coercion"]
+  },
+  {
+    "id": 12,
+    "domain": "web-development",
+    "topic": "React",
+    "difficulty": "hard",
+    "question": "What is the purpose of React hooks?",
+    "options": [
+      "To replace class components entirely",
+      "To allow state and lifecycle methods in functional components",
+      "To improve performance only",
+      "To handle routing"
+    ],
+    "correctAnswer": 1,
+    "explanation": "React hooks allow functional components to use state and lifecycle methods that were previously only available in class components.",
+    "resources": {
+      "article": "https://reactjs.org/docs/hooks-intro.html"
+    },
+    "tags": ["react", "hooks", "functional-components"]
+  },
+  {
+    "id": 13,
+    "domain": "cybersecurity",
+    "topic": "Network Security",
+    "difficulty": "easy",
+    "question": "What does HTTPS stand for?",
+    "options": [
+      "HyperText Transfer Protocol Secure",
+      "HyperText Transport Protocol Safe",
+      "High Transfer Text Protocol Secure",
+      "HyperText Transfer Process Secure"
+    ],
+    "correctAnswer": 0,
+    "explanation": "HTTPS stands for HyperText Transfer Protocol Secure, which is HTTP with SSL/TLS encryption for secure communication.",
+    "resources": {
+      "article": "https://www.cloudflare.com/learning/ssl/what-is-https/"
+    },
+    "tags": ["https", "ssl", "network-security"]
+  },
+  {
+    "id": 14,
+    "domain": "cybersecurity",
+    "topic": "Cryptography",
+    "difficulty": "medium",
+    "question": "What is the main difference between symmetric and asymmetric encryption?",
+    "options": [
+      "Symmetric is faster, asymmetric is slower",
+      "Symmetric uses one key, asymmetric uses two keys",
+      "Symmetric is more secure",
+      "There is no difference"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Symmetric encryption uses a single key for both encryption and decryption, while asymmetric encryption uses a pair of keys (public and private).",
+    "resources": {
+      "article": "https://www.ssl.com/article/symmetric-vs-asymmetric-encryption/"
+    },
+    "tags": ["cryptography", "symmetric", "asymmetric"]
+  },
+  {
+    "id": 15,
+    "domain": "cybersecurity",
+    "topic": "Ethical Hacking",
+    "difficulty": "hard",
+    "question": "What is a SQL injection attack?",
+    "options": [
+      "A type of virus",
+      "Injecting malicious SQL code into application queries",
+      "A network scanning technique",
+      "A password cracking method"
+    ],
+    "correctAnswer": 1,
+    "explanation": "SQL injection is a web security vulnerability that allows attackers to interfere with database queries by injecting malicious SQL code.",
+    "resources": {
+      "article": "https://owasp.org/www-community/attacks/SQL_Injection"
+    },
+    "tags": ["sql-injection", "web-security", "database-security"]
+  }
+]

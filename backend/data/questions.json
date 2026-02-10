@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "domain": "ai",
+    "topic": "Machine Learning Basics",
+    "difficulty": "easy",
+    "question": "What is machine learning?",
+    "options": [
+      "A programming language",
+      "A subset of artificial intelligence that enables computers to learn without being explicitly programmed",
+      "A type of database",
+      "A web development framework"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Machine learning is a subset of AI that allows computers to automatically learn and improve from experience without being explicitly programmed.",
+    "resources": {
+      "video": "https://www.youtube.com/watch?v=ukzFI9rgwfU",
+      "article": "https://www.ibm.com/cloud/learn/machine-learning"
+    },
+    "tags": [
+      "ml",
+      "basics",
+      "definition"
+    ],
+    "created_at": "2026-02-09T07:49:22.898Z"
+  },
+  {
+    "id": 2,
+    "domain": "ai",
+    "topic": "Neural Networks",
+    "difficulty": "easy",
+    "question": "What is a neural network inspired by?",
+    "options": [
+      "Computer circuits",
+      "The human brain",
+      "Mathematical equations",
+      "Network topology"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Neural networks are inspired by the structure and function of biological neural networks in the human brain.",
+    "resources": {
+      "article": "https://www.investopedia.com/terms/n/neuralnetwork.asp"
+    },
+    "tags": [
+      "neural-networks",
+      "basics"
+    ],
+    "created_at": "2026-02-09T07:49:22.899Z"
+  },
+  {
+    "id": 3,
+    "domain": "ai",
+    "topic": "Supervised Learning",
+    "difficulty": "easy",
+    "question": "In supervised learning, what is provided during training?",
+    "options": [
+      "Only input data",
+      "Only output data",
+      "Both input data and correct answers (labels)",
+      "Neither input nor output data"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Supervised learning uses labeled training data, which includes both input features and their corresponding correct answers.",
+    "resources": {
+      "article": "https://www.geeksforgeeks.org/supervised-unsupervised-learning/"
+    },
+    "tags": [
+      "supervised-learning",
+      "training-data"
+    ],
+    "created_at": "2026-02-09T07:49:22.899Z"
+  },
+  {
+    "id": 4,
+    "domain": "ai",
+    "topic": "Deep Learning",
+    "difficulty": "easy",
+    "question": "Deep learning is characterized by neural networks with:",
+    "options": [
+      "Only one layer",
+      "Two layers",
+      "Multiple hidden layers (typically more than 2-3)",
+      "No hidden layers"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Deep learning uses neural networks with multiple hidden layers, allowing the model to learn complex patterns in data.",
+    "resources": {
+      "article": "https://www.ibm.com/cloud/learn/deep-learning"
+    },
+    "tags": [
+      "deep-learning",
+      "layers"
+    ],
+    "created_at": "2026-02-09T07:49:22.899Z"
+  },
+  {
+    "id": 5,
+    "domain": "ai",
+    "topic": "AI Applications",
+    "difficulty": "easy",
+    "question": "Which of the following is NOT a common application of AI?",
+    "options": [
+      "Image recognition",
+      "Natural language processing",
+      "Manual data entry",
+      "Recommendation systems"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Manual data entry is a repetitive task that doesn't require AI. AI is typically used for tasks requiring pattern recognition, decision-making, or automation of complex processes.",
+    "resources": {
+      "article": "https://www.forbes.com/sites/forbestechcouncil/2020/03/10/15-business-applications-for-artificial-intelligence-and-machine-learning/"
+    },
+    "tags": [
+      "ai-applications",
+      "use-cases"
+    ],
+    "created_at": "2026-02-09T07:49:22.899Z"
+  }
+]
