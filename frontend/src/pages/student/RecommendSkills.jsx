@@ -129,8 +129,6 @@ const skillCourses = {
     { title: "Search courses on Udemy", url: "https://www.udemy.com/" },
     { title: "Search tutorials on FreeCodeCamp", url: "https://www.freecodecamp.org/" },
   ],
-
-  /* --- 10 NEW SKILLS ADDED BELOW --- */
   typescript: [
     { title: "Understanding TypeScript – 2023 Edition (Udemy)", url: "https://www.udemy.com/course/understanding-typescript/" },
     { title: "TypeScript Handbook – Official Docs", url: "https://www.typescriptlang.org/docs/handbook/intro.html" },
@@ -191,32 +189,23 @@ const toast = (text) => {
   el.style.right = "20px";
   el.style.bottom = "20px";
   el.style.padding = "10px 14px";
-  el.style.background = "linear-gradient(90deg, rgba(15,23,42,0.98), rgba(13,18,36,0.98))";
-  el.style.color = "#e6eef8";
+  el.style.background = "#111";
+  el.style.color = "#f5c518";
   el.style.borderRadius = "10px";
   el.style.zIndex = 99999;
-  el.style.boxShadow = "0 10px 30px rgba(2,6,23,0.6)";
+  el.style.boxShadow = "0 6px 18px rgba(0,0,0,0.2)";
   document.body.appendChild(el);
-  setTimeout(() => {
-    try { document.body.removeChild(el); } catch {}
-  }, 1600);
+  setTimeout(() => { try { document.body.removeChild(el); } catch {} }, 1600);
 };
 
 const copyToClipboard = async (text) => {
-  try {
-    await navigator.clipboard.writeText(text);
-    toast("Copied URL ✓");
-  } catch {
-    toast(text);
-  }
+  try { await navigator.clipboard.writeText(text); toast("Copied URL ✓"); }
+  catch { toast(text); }
 };
 
 const openInNewTab = (url) => {
-  try {
-    window.open(url, "_blank", "noopener,noreferrer");
-  } catch {
-    toast("Unable to open link — copy the URL instead.");
-  }
+  try { window.open(url, "_blank", "noopener,noreferrer"); }
+  catch { toast("Unable to open link — copy the URL instead."); }
 };
 
 const resolveCourses = (skill) => {
@@ -240,7 +229,6 @@ const RecommendSkills = () => {
   const [iframeBlocked, setIframeBlocked] = useState(false);
   const iframeRef = useRef(null);
 
-  // Job to skills mapping (local database - no backend needed)
   const jobSkillsMap = {
     "mern developer": ["JavaScript", "React", "Node.js", "Express", "MongoDB", "HTML/CSS", "REST API", "Git", "JWT Authentication", "Redux"],
     "full stack developer": ["JavaScript", "React", "Node.js", "Express", "PostgreSQL", "MongoDB", "HTML/CSS", "REST API", "Git", "Docker"],
@@ -264,61 +252,30 @@ const RecommendSkills = () => {
 
   const getSkillsForJob = (jobName) => {
     const jobLower = jobName.toLowerCase().trim();
-    
-    // Exact match
-    if (jobSkillsMap[jobLower]) {
-      return jobSkillsMap[jobLower];
-    }
-    
-    // Partial match
+    if (jobSkillsMap[jobLower]) return jobSkillsMap[jobLower];
     for (const key in jobSkillsMap) {
-      if (jobLower.includes(key) || key.includes(jobLower)) {
-        return jobSkillsMap[key];
-      }
+      if (jobLower.includes(key) || key.includes(jobLower)) return jobSkillsMap[key];
     }
-    
-    // Default fallback skills
     return ["Problem Solving", "Communication", "Team Collaboration", "Learning", "Git", "Documentation", "Critical Thinking", "Time Management"];
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!jobTitle.trim()) return;
-
     setIsLoading(true);
     setError(null);
-
     try {
-      // Use local job-to-skills mapping (no backend call needed)
       const recommendedSkills = getSkillsForJob(jobTitle);
-      
-      if (!recommendedSkills.length) {
-        setError("No skills found for this job title. Try a different one.");
-      } else {
-        setSkills(recommendedSkills);
-        setIsModalOpen(true);
-      }
-    } catch (err) {
-      console.error(err);
-      setError(err.message || "Unexpected error");
-    } finally {
-      setIsLoading(false);
-    }
+      if (!recommendedSkills.length) { setError("No skills found for this job title. Try a different one."); }
+      else { setSkills(recommendedSkills); setIsModalOpen(true); }
+    } catch (err) { console.error(err); setError(err.message || "Unexpected error"); }
+    finally { setIsLoading(false); }
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setSkills([]);
-    setPreviewUrl(null);
-    setIframeBlocked(false);
-  };
+  const closeModal = () => { setIsModalOpen(false); setSkills([]); setPreviewUrl(null); setIframeBlocked(false); };
 
   const openAllTopCourses = (skillsList) => {
-    if (!skillsList || !skillsList.length) {
-      toast("No skills to open.");
-      return;
-    }
-
+    if (!skillsList || !skillsList.length) { toast("No skills to open."); return; }
     const opened = [];
     try {
       for (const skill of skillsList) {
@@ -326,47 +283,31 @@ const RecommendSkills = () => {
         if (courses && courses.length) {
           const url = courses[0].url;
           const w = window.open(url, "_blank", "noopener,noreferrer");
-          if (!w) {
-            toast("Popup blocked — browser prevented opening multiple tabs. Allow popups and try again.");
-            return;
-          } else {
-            opened.push(w);
-          }
+          if (!w) { toast("Popup blocked — browser prevented opening multiple tabs. Allow popups and try again."); return; }
+          else { opened.push(w); }
         }
       }
       if (opened.length) toast("Opened top courses in new tabs.");
-    } catch (err) {
-      console.error(err);
-      toast("Failed to open tabs. Browser may block popups.");
-    }
+    } catch (err) { console.error(err); toast("Failed to open tabs. Browser may block popups."); }
   };
 
   const openPreview = (url) => {
     setPreviewUrl(url);
     setIframeBlocked(false);
-
-    // simple heuristic to flag blocked embed if onLoad doesn't fire within 2s
     setTimeout(() => {
       if (!iframeRef.current) return;
-      if (!iframeRef.current.dataset.loaded) {
-        setIframeBlocked(true);
-      }
+      if (!iframeRef.current.dataset.loaded) setIframeBlocked(true);
     }, 1900);
   };
 
   const saveLearningPlan = async () => {
-    if (!skills.length) {
-      toast("Nothing to save.");
-      return;
-    }
-
+    if (!skills.length) { toast("Nothing to save."); return; }
     const payload = {
       job_title: jobTitle,
       skills,
       timestamp: new Date().toISOString(),
       plan: skills.map((s) => ({ skill: s, top_course: resolveCourses(s)[0] || null })),
     };
-
     try {
       const resp = await fetch("http://127.0.0.1:8000/save_learning_plan/", {
         method: "POST",
@@ -381,79 +322,52 @@ const RecommendSkills = () => {
         existing.push(payload);
         localStorage.setItem("learningPlans", JSON.stringify(existing));
         toast("Server unreachable — saved plan locally.");
-      } catch (e) {
-        console.error(e);
-        toast("Failed to save plan.");
-      }
+      } catch (e) { console.error(e); toast("Failed to save plan."); }
     }
   };
 
-  // background image provided by user
-  const backgroundUrl = "https://m.media-amazon.com/images/I/81V2hzNkcsL._AC_UF894,1000_QL80_.jpg";
-
   return (
     <>
-      
-      {/* Use provided background image with a semi-opaque gradient overlay for readability */}
-      <div
-        className="min-h-screen bg-cover bg-center text-gray-100 relative"
-        style={{
-          overflowX: "hidden",
-          backgroundImage: `linear-gradient(120deg, rgba(14,20,32,0.65), rgba(20,24,34,0.65)), url('${backgroundUrl}')`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        {/* Keep the animated-gradient as a subtle motion layer but make it transparent so image shows */}
-        <div className="absolute inset-0 -z-10 animated-gradient" aria-hidden="true" style={{ opacity: 0.22 }} />
-
+      <div className="min-h-screen" style={{ background: '#ffffff' }}>
         <div className="container mx-auto px-4 py-12 max-w-4xl">
-          <h1 className="text-3xl font-bold mb-2 text-center text-indigo-400 mt-[40px]">
-            Skill Recommendation Engine
+          <h1 className="text-3xl font-bold mb-2 text-center mt-[40px]" style={{ color: '#111' }}>
+            Skill <span style={{ color: '#d4a800' }}>Recommendation</span> Engine
           </h1>
-          <p className="text-center text-gray-200 mb-8">Enter a job title to discover essential skills and start learning instantly</p>
+          <p className="text-center mb-8" style={{ color: '#666' }}>Enter a job title to discover essential skills and start learning instantly</p>
 
           <form onSubmit={handleSubmit} className="mb-6">
-            <div className="flex shadow-xl rounded-full overflow-hidden bg-gradient-to-r from-gray-800 to-gray-900 border border-gray-700 max-w-2xl mx-auto">
+            <div className="flex shadow-sm rounded-full overflow-hidden max-w-2xl mx-auto"
+              style={{ border: '1px solid #e5e5e5', background: '#fff' }}>
               <input
                 type="text"
                 value={jobTitle}
                 onChange={(e) => setJobTitle(e.target.value)}
                 placeholder="Enter job title (e.g., MERN developer, Data Scientist)"
-                className="flex-1 bg-transparent px-6 py-4 text-gray-100 placeholder-gray-400 focus:outline-none"
+                className="flex-1 px-6 py-4 focus:outline-none"
+                style={{ background: 'transparent', color: '#111' }}
                 disabled={isLoading}
               />
-              <button
-                type="submit"
-                disabled={isLoading || !jobTitle.trim()}
-                className={`px-6 flex items-center justify-center ${isLoading || !jobTitle.trim() ? "text-gray-500 cursor-not-allowed" : "text-indigo-400 hover:text-indigo-300"}`}
-              >
+              <button type="submit" disabled={isLoading || !jobTitle.trim()}
+                className={`px-6 flex items-center justify-center ${isLoading || !jobTitle.trim() ? "cursor-not-allowed" : ""}`}
+                style={{ color: isLoading || !jobTitle.trim() ? '#ccc' : '#d4a800' }}>
                 {isLoading ? <ImSpinner8 className="animate-spin" size={20} /> : <FiSearch size={20} />}
               </button>
             </div>
           </form>
 
           {error && (
-            <div className="bg-red-900/50 border border-red-700 text-red-200 px-4 py-3 rounded-lg mb-6 max-w-2xl mx-auto">
+            <div className="px-4 py-3 rounded-lg mb-6 max-w-2xl mx-auto" style={{ background: '#fef2f2', border: '1px solid #fecaca', color: '#dc2626' }}>
               {error}
             </div>
           )}
 
-          {/* Example Job Titles */}
           <div className="mt-4 text-center">
-            <p className="text-gray-300 mb-3">Try these examples:</p>
+            <p className="mb-3" style={{ color: '#999' }}>Try these examples:</p>
             <div className="flex flex-wrap justify-center gap-2">
-              {[
-                "MERN Developer",
-                "Data Scientist",
-                "DevOps Engineer",
-                "UI/UX Designer",
-              ].map((title) => (
-                <button
-                  key={title}
-                  onClick={() => setJobTitle(title)}
-                  className="px-4 py-2 bg-gray-800/60 hover:bg-gray-700 rounded-full text-sm border border-gray-700 transition-colors"
-                >
+              {["MERN Developer", "Data Scientist", "DevOps Engineer", "UI/UX Designer"].map((title) => (
+                <button key={title} onClick={() => setJobTitle(title)}
+                  className="px-4 py-2 rounded-full text-sm transition-colors"
+                  style={{ background: '#fff', border: '1px solid #e5e5e5', color: '#333' }}>
                   {title}
                 </button>
               ))}
@@ -462,77 +376,70 @@ const RecommendSkills = () => {
 
           {/* Modal */}
           {isModalOpen && (
-            <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-              <div className="w-full max-w-6xl bg-transparent rounded-2xl">
-                <div className="bg-gray-800/70 backdrop-blur-lg border border-white/6 rounded-2xl max-h-[90vh] flex flex-col overflow-hidden shadow-2xl">
+            <div className="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50 p-4" style={{ background: 'rgba(0,0,0,0.4)' }}>
+              <div className="w-full max-w-6xl rounded-2xl">
+                <div className="rounded-2xl max-h-[90vh] flex flex-col overflow-hidden shadow-2xl"
+                  style={{ background: '#fff', border: '1px solid #e5e5e5' }}>
                   {/* Sticky header */}
-                  <div className="sticky top-0 z-30 bg-gradient-to-r from-gray-800/80 to-gray-900/80 px-6 py-4 border-b border-white/6 backdrop-blur-sm flex items-center justify-between">
+                  <div className="sticky top-0 z-30 px-6 py-4 flex items-center justify-between"
+                    style={{ background: '#fff', borderBottom: '1px solid #e5e5e5' }}>
                     <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-500 to-pink-500 flex items-center justify-center text-white text-xl shadow-lg transform-gpu" style={{boxShadow: "0 10px 30px rgba(99,102,241,0.15)"}}>
+                      <div className="w-12 h-12 rounded-full flex items-center justify-center text-xl shadow-sm"
+                        style={{ background: 'linear-gradient(135deg, #f5c518, #d4a800)', color: '#0a0a0a' }}>
                         <FiCheckCircle />
                       </div>
                       <div>
-                        <h2 className="text-xl font-semibold text-white">Recommended Skills for</h2>
-                        <div className="text-indigo-200 font-medium">{jobTitle}</div>
-                        <div className="text-sm text-gray-400 mt-1">{skills.length} essential skill{skills.length !== 1 ? "s" : ""} to master</div>
+                        <h2 className="text-xl font-semibold" style={{ color: '#111' }}>Recommended Skills for</h2>
+                        <div className="font-medium" style={{ color: '#d4a800' }}>{jobTitle}</div>
+                        <div className="text-sm mt-1" style={{ color: '#999' }}>{skills.length} essential skill{skills.length !== 1 ? "s" : ""} to master</div>
                       </div>
                     </div>
 
                     <div className="flex items-center gap-3">
-                      <button onClick={() => openAllTopCourses(skills)} className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white px-3 py-1 rounded text-sm shadow-sm">
-                        Open All Top Courses
-                      </button>
-                      <button onClick={saveLearningPlan} className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1 rounded text-sm shadow-sm">
+                      <button onClick={() => openAllTopCourses(skills)} className="inline-flex items-center gap-2 px-3 py-1 rounded text-sm transition-all"
+                        style={{ background: 'linear-gradient(135deg, #f5c518, #d4a800)', color: '#0a0a0a' }}>Open All Top Courses</button>
+                      <button onClick={saveLearningPlan} className="inline-flex items-center gap-2 px-3 py-1 rounded text-sm transition-all"
+                        style={{ background: '#fafafa', border: '1px solid #e5e5e5', color: '#555' }}>
                         <FiSave /> Save Learning Plan
                       </button>
-                      <button onClick={closeModal} className="text-gray-300 hover:text-white p-2 rounded-full">
-                        <FiX size={20} />
-                      </button>
+                      <button onClick={closeModal} className="p-2 rounded-full" style={{ color: '#999' }}><FiX size={20} /></button>
                     </div>
                   </div>
 
-                  {/* Content (scrollable) */}
+                  {/* Content */}
                   <div className="flex-1 overflow-y-auto p-6">
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                       <div className="lg:col-span-2 space-y-4">
                         {skills.map((skill, idx) => {
                           const courses = resolveCourses(skill);
                           return (
-                            <div
-                              key={idx}
-                              className="bg-gradient-to-br from-white/3 to-white/6 border border-white/6 rounded-xl p-4 transform transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
-                            >
+                            <div key={idx} className="rounded-xl p-4 transition-all duration-300 hover:shadow-md"
+                              style={{ background: '#fafafa', border: '1px solid #e5e5e5' }}>
                               <div className="flex items-start justify-between">
                                 <div>
                                   <div className="inline-flex items-center gap-3">
-                                    <div className="w-9 h-9 rounded-md bg-gradient-to-br from-indigo-600 to-purple-500 flex items-center justify-center text-white shadow">
+                                    <div className="w-9 h-9 rounded-md flex items-center justify-center shadow-sm"
+                                      style={{ background: 'linear-gradient(135deg, #f5c518, #d4a800)', color: '#0a0a0a' }}>
                                       <span className="font-semibold">{skill.charAt(0).toUpperCase()}</span>
                                     </div>
                                     <div>
-                                      <div className="text-lg font-semibold text-white">{skill}</div>
-                                      <div className="text-xs text-gray-400">Top picks to learn {skill}</div>
+                                      <div className="text-lg font-semibold" style={{ color: '#111' }}>{skill}</div>
+                                      <div className="text-xs" style={{ color: '#999' }}>Top picks to learn {skill}</div>
                                     </div>
                                   </div>
                                 </div>
 
                                 <div className="flex items-center gap-2">
-                                  <button
-                                    onClick={() => openInNewTab(courses[0].url)}
-                                    className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1 rounded shadow-sm text-sm"
-                                    title="Open top course"
-                                  >
-                                    Open Top Course
-                                    <FiExternalLink />
+                                  <button onClick={() => openInNewTab(courses[0].url)}
+                                    className="inline-flex items-center gap-2 px-3 py-1 rounded text-sm transition-all"
+                                    style={{ background: 'linear-gradient(135deg, #f5c518, #d4a800)', color: '#0a0a0a' }}
+                                    title="Open top course">
+                                    Open Top Course <FiExternalLink />
                                   </button>
-
-                                  <button
-                                    onClick={() => {
-                                      const all = courses.map((c) => c.url).join("\n");
-                                      copyToClipboard(all);
-                                    }}
-                                    className="inline-flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-gray-200 px-2 py-1 rounded text-sm"
-                                    title="Copy all course URLs"
-                                  >
+                                  <button onClick={() => { const all = courses.map((c) => c.url).join("\n"); copyToClipboard(all); }}
+                                    className="inline-flex items-center gap-2 px-2 py-1 rounded text-sm transition-colors"
+                                    style={{ background: '#fff', border: '1px solid #e5e5e5', color: '#555' }}
+                                    title="Copy all course URLs">
                                     <FiCopy /> Copy Links
                                   </button>
                                 </div>
@@ -540,30 +447,23 @@ const RecommendSkills = () => {
 
                               <div className="mt-3 grid grid-cols-1 gap-2">
                                 {courses.map((c, i) => (
-                                  <div key={i} className="flex items-center justify-between bg-gray-900/60 rounded-md p-3 border border-white/6">
+                                  <div key={i} className="flex items-center justify-between rounded-md p-3"
+                                    style={{ background: '#fff', border: '1px solid #e5e5e5' }}>
                                     <div>
-                                      <a
-                                        href="#!"
+                                      <a href="#!"
                                         onClick={(ev) => { ev.preventDefault(); setIframeBlocked(false); setPreviewUrl(c.url); }}
-                                        className="text-sm text-indigo-100 hover:text-white underline"
-                                      >
-                                        {c.title}
-                                      </a>
-                                      <div className="text-xs text-gray-400 mt-1">{new URL(c.url).hostname}</div>
+                                        className="text-sm underline" style={{ color: '#d4a800' }}>{c.title}</a>
+                                      <div className="text-xs mt-1" style={{ color: '#999' }}>{new URL(c.url).hostname}</div>
                                     </div>
-
                                     <div className="flex items-center gap-2">
-                                      <button
-                                        onClick={() => openInNewTab(c.url)}
-                                        className="px-2 py-1 rounded bg-indigo-500/10 text-indigo-200 hover:bg-indigo-500/20 text-sm inline-flex items-center gap-2"
-                                      >
-                                        Open
-                                        <FiExternalLink />
+                                      <button onClick={() => openInNewTab(c.url)}
+                                        className="px-2 py-1 rounded text-sm inline-flex items-center gap-2"
+                                        style={{ background: '#fffbeb', color: '#92400e', border: '1px solid #fde68a' }}>
+                                        Open <FiExternalLink />
                                       </button>
-                                      <button
-                                        onClick={() => copyToClipboard(c.url)}
-                                        className="px-2 py-1 rounded bg-gray-700/20 text-gray-200 hover:bg-gray-700/40 text-sm inline-flex items-center gap-2"
-                                      >
+                                      <button onClick={() => copyToClipboard(c.url)}
+                                        className="px-2 py-1 rounded text-sm inline-flex items-center gap-2"
+                                        style={{ background: '#fafafa', color: '#555', border: '1px solid #e5e5e5' }}>
                                         <FiCopy /> Copy
                                       </button>
                                     </div>
@@ -571,12 +471,12 @@ const RecommendSkills = () => {
                                 ))}
                               </div>
 
-                              <div className="mt-3 flex items-center justify-between text-xs text-gray-400">
+                              <div className="mt-3 flex items-center justify-between text-xs" style={{ color: '#999' }}>
                                 <div className="flex items-center gap-2">
-                                  <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                                  <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: '#16a34a' }} />
                                   <div>Start with the top course, then move to the second one</div>
                                 </div>
-                                <div>Est. time: <span className="text-indigo-300">4-8 weeks</span></div>
+                                <div>Est. time: <span style={{ color: '#d4a800' }}>4-8 weeks</span></div>
                               </div>
                             </div>
                           );
@@ -584,45 +484,48 @@ const RecommendSkills = () => {
                       </div>
 
                       {/* Preview column */}
-                      <div className="bg-gray-900/60 rounded-xl p-3 border border-white/6 flex flex-col">
+                      <div className="rounded-xl p-3 flex flex-col" style={{ background: '#fafafa', border: '1px solid #e5e5e5' }}>
                         <div className="flex items-center justify-between mb-2">
-                          <div className="text-sm text-gray-300 font-semibold">Course Preview</div>
-                          <div className="text-xs text-gray-400">Click a course to preview</div>
+                          <div className="text-sm font-semibold" style={{ color: '#333' }}>Course Preview</div>
+                          <div className="text-xs" style={{ color: '#999' }}>Click a course to preview</div>
                         </div>
 
-                        <div className="flex-1 bg-black rounded overflow-hidden relative">
+                        <div className="flex-1 rounded overflow-hidden relative" style={{ background: '#fff', border: '1px solid #e5e5e5', minHeight: '300px' }}>
                           {previewUrl ? (
                             <>
                               <iframe
                                 ref={iframeRef}
                                 title="course-preview"
                                 src={previewUrl}
-                                className="w-full h-full bg-white/5"
+                                className="w-full h-full"
+                                style={{ background: '#fafafa' }}
                                 onLoad={() => { if (iframeRef.current) iframeRef.current.dataset.loaded = "1"; }}
                                 onError={() => setIframeBlocked(true)}
                               />
                               {iframeBlocked && (
-                                <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/75 p-4 text-center">
-                                  <div className="text-lg text-white font-semibold mb-2">Preview blocked</div>
-                                  <div className="text-sm text-gray-300 mb-3">
+                                <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center" style={{ background: 'rgba(255,255,255,0.95)' }}>
+                                  <div className="text-lg font-semibold mb-2" style={{ color: '#111' }}>Preview blocked</div>
+                                  <div className="text-sm mb-3" style={{ color: '#666' }}>
                                     This site prevents embedding. Open the course in a new tab or copy the URL.
                                   </div>
                                   <div className="flex gap-2">
-                                    <button onClick={() => openInNewTab(previewUrl)} className="px-3 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded">Open in new tab</button>
-                                    <button onClick={() => copyToClipboard(previewUrl)} className="px-3 py-2 bg-gray-700 hover:bg-gray-600 text-gray-200 rounded">Copy URL</button>
+                                    <button onClick={() => openInNewTab(previewUrl)} className="px-3 py-2 rounded"
+                                      style={{ background: 'linear-gradient(135deg, #f5c518, #d4a800)', color: '#0a0a0a' }}>Open in new tab</button>
+                                    <button onClick={() => copyToClipboard(previewUrl)} className="px-3 py-2 rounded"
+                                      style={{ background: '#fafafa', border: '1px solid #e5e5e5', color: '#555' }}>Copy URL</button>
                                   </div>
                                 </div>
                               )}
                             </>
                           ) : (
                             <div className="h-full flex flex-col items-center justify-center text-center p-4">
-                              <div className="text-indigo-300 font-semibold mb-2">No preview selected</div>
-                              <div className="text-sm text-gray-400">Click a course title to load a live preview (may be blocked by some sites).</div>
+                              <div className="font-semibold mb-2" style={{ color: '#d4a800' }}>No preview selected</div>
+                              <div className="text-sm" style={{ color: '#999' }}>Click a course title to load a live preview (may be blocked by some sites).</div>
                             </div>
                           )}
                         </div>
 
-                        <div className="text-xs text-gray-400 mt-2">
+                        <div className="text-xs mt-2" style={{ color: '#999' }}>
                           Tip: use "Open Top Course" to avoid preview-block issues. If preview is blocked, copy the URL or open in new tab.
                         </div>
                       </div>
@@ -630,13 +533,14 @@ const RecommendSkills = () => {
                   </div>
 
                   {/* Sticky footer */}
-                  <div className="sticky bottom-0 z-30 bg-gradient-to-r from-gray-900/70 to-gray-800/70 px-4 py-3 border-t border-white/6 flex items-center justify-end gap-3">
-                    <button onClick={saveLearningPlan} className="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-medium inline-flex items-center gap-2">
+                  <div className="sticky bottom-0 z-30 px-4 py-3 flex items-center justify-end gap-3"
+                    style={{ background: '#fafafa', borderTop: '1px solid #e5e5e5' }}>
+                    <button onClick={saveLearningPlan} className="px-4 py-2 rounded-lg font-medium inline-flex items-center gap-2"
+                      style={{ background: 'linear-gradient(135deg, #f5c518, #d4a800)', color: '#0a0a0a' }}>
                       <FiSave /> Save Learning Plan
                     </button>
-                    <button onClick={closeModal} className="px-4 py-2 rounded-lg bg-gray-700 hover:bg-gray-600 text-white font-medium">
-                      Close
-                    </button>
+                    <button onClick={closeModal} className="px-4 py-2 rounded-lg font-medium"
+                      style={{ background: '#fff', border: '1px solid #e5e5e5', color: '#555' }}>Close</button>
                   </div>
                 </div>
               </div>
@@ -644,44 +548,8 @@ const RecommendSkills = () => {
           )}
         </div>
       </div>
-
-      {/* Styles: subtle animated gradient + small helpers */}
-      <style>{`
-        /* Subtle soft gradient motion */
-        .animated-gradient {
-          background: linear-gradient(120deg, rgba(14,20,32,0.95), rgba(20,24,34,0.95));
-          background-size: 400% 400%;
-          animation: gradientShift 12s ease infinite;
-          filter: saturate(1.05);
-        }
-        @keyframes gradientShift {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-
-        /* small hover scale helper */
-        .hover\\:scale-102:hover { transform: scale(1.02); }
-
-        /* nicely rounded scrollbar for modal */
-        .bg-gray-800\\/70 .overflow-y-auto::-webkit-scrollbar {
-          width: 10px;
-        }
-        .bg-gray-800\\/70 .overflow-y-auto::-webkit-scrollbar-thumb {
-          background: linear-gradient(180deg, rgba(99,102,241,0.35), rgba(236,72,153,0.25));
-          border-radius: 999px;
-          border: 2px solid rgba(0,0,0,0.12);
-        }
-        .bg-gray-800\\/70 .overflow-y-auto::-webkit-scrollbar-track {
-          background: rgba(255,255,255,0.02);
-        }
-
-        /* subtle transform GPU */
-        .transform-gpu { transform: translateZ(0); }
-      `}</style>
     </>
   );
 };
 
 export default RecommendSkills;
-

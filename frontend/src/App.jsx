@@ -29,6 +29,7 @@ import StudentChatroom from "./pages/student/StudentChatroom";
 import Sidebar from "./components/Sidebar";
 import ResumeAnalyzer from "./pages/ats/ResumeAnalyzer";
 import ResumeBuilder from "./pages/ats/ResumeBuilder";
+import ExamPreparation from "./pages/student/ExamPreparation";
 
 
 const App = () => {
@@ -66,6 +67,7 @@ const App = () => {
           <Route path="/chatroom" element={<StudentChatroom/>} />
           <Route path="/resume-analyzer" element={<ResumeAnalyzer/>} />
           <Route path="/resume-builder" element={<ResumeBuilder/>} />
+          <Route path="/exam-prep" element={<ExamPreparation/>} />
 
         </Routes>
       </BrowserRouter>

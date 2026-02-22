@@ -4,16 +4,12 @@ import {
   AiOutlineUser,
   AiOutlineMenu,
   AiOutlineClose,
-  AiOutlineHome,
-  AiOutlineTeam,
-  AiOutlineSolution,
-  AiOutlineContacts,
   AiOutlineMessage,
   AiOutlineRobot,
   AiOutlineBulb,
   AiOutlineFileText,
   AiOutlineLogout,
-  AiOutlineUserSwitch,
+  AiOutlineSolution,
   AiOutlineSchedule,
   AiOutlineUsergroupAdd,
 } from "react-icons/ai";
@@ -30,72 +26,64 @@ const Header = () => {
     window.location.href = "/login";
   };
 
+  const linkStyle = { color: '#333' };
+  const linkHoverClass = "px-3 py-2 rounded-md text-sm font-medium flex items-center transition-colors duration-200";
+
   const renderStudentLinks = () => (
     <>
-      <Link
-        to="/allIndustryMentors"
-        className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center"
-      >
+      <Link to="/allIndustryMentors" className={linkHoverClass} style={linkStyle}
+        onMouseEnter={(e) => { e.currentTarget.style.color = '#d4a800'; }}
+        onMouseLeave={(e) => { e.currentTarget.style.color = '#333'; }}>
         <FiBriefcase className="mr-1" /> Industry Mentors
       </Link>
-      <Link
-        to="/allCollegeMentors"
-        className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center"
-      >
+      <Link to="/allCollegeMentors" className={linkHoverClass} style={linkStyle}
+        onMouseEnter={(e) => { e.currentTarget.style.color = '#d4a800'; }}
+        onMouseLeave={(e) => { e.currentTarget.style.color = '#333'; }}>
         <RiUserStarLine className="mr-1" /> College Mentors
       </Link>
-      <Link
-        to="/chat"
-        className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center"
-      >
+      <Link to="/chat" className={linkHoverClass} style={linkStyle}
+        onMouseEnter={(e) => { e.currentTarget.style.color = '#d4a800'; }}
+        onMouseLeave={(e) => { e.currentTarget.style.color = '#333'; }}>
         <AiOutlineMessage className="mr-1" /> Chat
       </Link>
-      <Link
-        to="/chatbot"
-        className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center"
-      >
+      <Link to="/chatbot" className={linkHoverClass} style={linkStyle}
+        onMouseEnter={(e) => { e.currentTarget.style.color = '#d4a800'; }}
+        onMouseLeave={(e) => { e.currentTarget.style.color = '#333'; }}>
         <AiOutlineRobot className="mr-1" /> Chatbot
       </Link>
-      <Link
-        to="/career"
-        className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center"
-      >
+      <Link to="/career" className={linkHoverClass} style={linkStyle}
+        onMouseEnter={(e) => { e.currentTarget.style.color = '#d4a800'; }}
+        onMouseLeave={(e) => { e.currentTarget.style.color = '#333'; }}>
         <AiOutlineBulb className="mr-1" /> Career Guidance
       </Link>
-      <Link
-        to="/recommendSkills"
-        className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center"
-      >
+      <Link to="/recommendSkills" className={linkHoverClass} style={linkStyle}
+        onMouseEnter={(e) => { e.currentTarget.style.color = '#d4a800'; }}
+        onMouseLeave={(e) => { e.currentTarget.style.color = '#333'; }}>
         <AiOutlineFileText className="mr-1" /> Recommend Skills
       </Link>
-      <Link
-        to="/ats"
-        className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center"
-      >
+      <Link to="/ats" className={linkHoverClass} style={linkStyle}
+        onMouseEnter={(e) => { e.currentTarget.style.color = '#d4a800'; }}
+        onMouseLeave={(e) => { e.currentTarget.style.color = '#333'; }}>
         <AiOutlineSolution className="mr-1" /> ATS
       </Link>
-      <Link
-        to="/allTask"
-        className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center"
-      >
+      <Link to="/allTask" className={linkHoverClass} style={linkStyle}
+        onMouseEnter={(e) => { e.currentTarget.style.color = '#d4a800'; }}
+        onMouseLeave={(e) => { e.currentTarget.style.color = '#333'; }}>
         <AiOutlineSolution className="mr-1" /> All Tasks
       </Link>
-      <Link
-        to="/Quiz"
-        className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center"
-      >
+      <Link to="/Quiz" className={linkHoverClass} style={linkStyle}
+        onMouseEnter={(e) => { e.currentTarget.style.color = '#d4a800'; }}
+        onMouseLeave={(e) => { e.currentTarget.style.color = '#333'; }}>
         <AiOutlineSolution className="mr-1" /> AI-Quiz
       </Link>
-      <Link
-        to="/certification"
-        className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center"
-      >
+      <Link to="/certification" className={linkHoverClass} style={linkStyle}
+        onMouseEnter={(e) => { e.currentTarget.style.color = '#d4a800'; }}
+        onMouseLeave={(e) => { e.currentTarget.style.color = '#333'; }}>
         <AiOutlineSolution className="mr-1" /> Certification-Spoof
       </Link>
-      <Link
-        to="/profile"
-        className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center"
-      >
+      <Link to="/profile" className={linkHoverClass} style={linkStyle}
+        onMouseEnter={(e) => { e.currentTarget.style.color = '#d4a800'; }}
+        onMouseLeave={(e) => { e.currentTarget.style.color = '#333'; }}>
         <AiOutlineSolution className="mr-1" /> Profile
       </Link>
     </>
@@ -103,16 +91,14 @@ const Header = () => {
 
   const renderIndustryMentorLinks = () => (
     <>
-      <Link
-        to="/chat"
-        className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center"
-      >
+      <Link to="/chat" className={linkHoverClass} style={linkStyle}
+        onMouseEnter={(e) => { e.currentTarget.style.color = '#d4a800'; }}
+        onMouseLeave={(e) => { e.currentTarget.style.color = '#333'; }}>
         <AiOutlineMessage className="mr-1" /> Chat
       </Link>
-      <Link
-        to="/indFeedback"
-        className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center"
-      >
+      <Link to="/indFeedback" className={linkHoverClass} style={linkStyle}
+        onMouseEnter={(e) => { e.currentTarget.style.color = '#d4a800'; }}
+        onMouseLeave={(e) => { e.currentTarget.style.color = '#333'; }}>
         <AiOutlineSchedule className="mr-1" /> Feedbacks
       </Link>
     </>
@@ -120,23 +106,19 @@ const Header = () => {
 
   const renderCollegeMentorLinks = () => (
     <>
-      <Link
-        to="/addTask"
-        className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center"
-      >
+      <Link to="/addTask" className={linkHoverClass} style={linkStyle}
+        onMouseEnter={(e) => { e.currentTarget.style.color = '#d4a800'; }}
+        onMouseLeave={(e) => { e.currentTarget.style.color = '#333'; }}>
         <AiOutlineSchedule className="mr-1" /> Add Task
       </Link>
-
-      <Link
-        to="/chat"
-        className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center"
-      >
+      <Link to="/chat" className={linkHoverClass} style={linkStyle}
+        onMouseEnter={(e) => { e.currentTarget.style.color = '#d4a800'; }}
+        onMouseLeave={(e) => { e.currentTarget.style.color = '#333'; }}>
         <AiOutlineMessage className="mr-1" /> Chat
       </Link>
-      <Link
-        to="/collegeFeedback"
-        className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center"
-      >
+      <Link to="/collegeFeedback" className={linkHoverClass} style={linkStyle}
+        onMouseEnter={(e) => { e.currentTarget.style.color = '#d4a800'; }}
+        onMouseLeave={(e) => { e.currentTarget.style.color = '#333'; }}>
         <AiOutlineSchedule className="mr-1" /> Feedbacks
       </Link>
     </>
@@ -144,22 +126,19 @@ const Header = () => {
 
   const renderAdminLinks = () => (
     <>
-      <Link
-        to="/students"
-        className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center"
-      >
+      <Link to="/students" className={linkHoverClass} style={linkStyle}
+        onMouseEnter={(e) => { e.currentTarget.style.color = '#d4a800'; }}
+        onMouseLeave={(e) => { e.currentTarget.style.color = '#333'; }}>
         <AiOutlineUsergroupAdd className="mr-1" /> Students
       </Link>
-      <Link
-        to="/college-mentors"
-        className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center"
-      >
+      <Link to="/college-mentors" className={linkHoverClass} style={linkStyle}
+        onMouseEnter={(e) => { e.currentTarget.style.color = '#d4a800'; }}
+        onMouseLeave={(e) => { e.currentTarget.style.color = '#333'; }}>
         <RiUserStarLine className="mr-1" /> College Mentors
       </Link>
-      <Link
-        to="/industry-mentors"
-        className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center"
-      >
+      <Link to="/industry-mentors" className={linkHoverClass} style={linkStyle}
+        onMouseEnter={(e) => { e.currentTarget.style.color = '#d4a800'; }}
+        onMouseLeave={(e) => { e.currentTarget.style.color = '#333'; }}>
         <FiBriefcase className="mr-1" /> Industry Mentors
       </Link>
     </>
@@ -168,21 +147,16 @@ const Header = () => {
   const renderAuthLinks = () => {
     if (role) {
       return (
-        <>
-          <button
-            onClick={handleLogout}
-            className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center"
-          >
-            <AiOutlineLogout className="mr-1" /> Logout
-          </button>
-        </>
+        <button onClick={handleLogout} className={linkHoverClass} style={linkStyle}
+          onMouseEnter={(e) => { e.currentTarget.style.color = '#d4a800'; }}
+          onMouseLeave={(e) => { e.currentTarget.style.color = '#333'; }}>
+          <AiOutlineLogout className="mr-1" /> Logout
+        </button>
       );
     }
     return (
-      <Link
-        to="/login"
-        className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium flex items-center"
-      >
+      <Link to="/login" className="px-4 py-2 rounded-md text-sm font-medium flex items-center"
+        style={{ background: 'linear-gradient(135deg, #f5c518, #d4a800)', color: '#0a0a0a' }}>
         <AiOutlineUser className="mr-1" /> Login
       </Link>
     );
@@ -190,27 +164,22 @@ const Header = () => {
 
   const renderRoleLinks = () => {
     switch (role) {
-      case "Student":
-        return renderStudentLinks();
-      case "Industry Mentor":
-        return renderIndustryMentorLinks();
-      case "College Mentor":
-        return renderCollegeMentorLinks();
-      case "Admin":
-        return renderAdminLinks();
-      default:
-        return <></>;
+      case "Student": return renderStudentLinks();
+      case "Industry Mentor": return renderIndustryMentorLinks();
+      case "College Mentor": return renderCollegeMentorLinks();
+      case "Admin": return renderAdminLinks();
+      default: return <></>;
     }
   };
 
   return (
-    <header className="bg-gray-900/60 backdrop-blur-sm border-b border-gray-800 fixed w-full z-50">
+    <header className="fixed w-full z-50" style={{ background: 'rgba(255,255,255,0.95)', backdropFilter: 'blur(8px)', borderBottom: '1px solid #e5e5e5' }}>
       <div className="mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link to="/" className="flex items-center">
-              <span className="text-2xl font-bold bg-gradient-to-r from-indigo-400 to-indigo-600 bg-clip-text text-transparent">
+              <span className="text-2xl font-bold" style={{ color: '#d4a800' }}>
                 Path Nexus AI
               </span>
             </Link>
@@ -227,15 +196,8 @@ const Header = () => {
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center">
             {renderAuthLinks()}
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-300 hover:text-white focus:outline-none ml-4"
-            >
-              {isOpen ? (
-                <AiOutlineClose size={24} />
-              ) : (
-                <AiOutlineMenu size={24} />
-              )}
+            <button onClick={() => setIsOpen(!isOpen)} className="focus:outline-none ml-4" style={{ color: '#333' }}>
+              {isOpen ? <AiOutlineClose size={24} /> : <AiOutlineMenu size={24} />}
             </button>
           </div>
         </div>
@@ -243,7 +205,7 @@ const Header = () => {
 
       {/* Mobile menu */}
       <div className={`md:hidden ${isOpen ? "block" : "hidden"}`}>
-        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-gray-900">
+        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3" style={{ background: '#fff' }}>
           {renderRoleLinks()}
         </div>
       </div>

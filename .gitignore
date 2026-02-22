@@ -29,7 +29,7 @@ MANIFEST
 venv/
 env/
 ENV/
-.venv
+.venv/
 
 # Flask
 instance/
@@ -46,7 +46,6 @@ Images/
 # Build outputs
 dist/
 build/
-*.log
 *.tgz
 
 # Environment variables
@@ -56,13 +55,25 @@ build/
 .env.test.local
 .env.production.local
 
-# IDE
+# IDE & Editors
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
+*.sublime-project
+*.sublime-workspace
+
+# OS files
 .DS_Store
+Thumbs.db
+Desktop.ini
+ehthumbs.db
+
+# Batch & Script files
+*.bat
+*.sh
+!start.sh
 
 # Database
 *.sqlite
@@ -79,10 +90,6 @@ tmp/
 chromedriver.exe
 poppler/
 
-# OS
-Thumbs.db
-.DS_Store
-
 # Logs
 logs/
 *.log
@@ -94,3 +101,10 @@ pnpm-debug.log*
 # Testing
 coverage/
 .nyc_output/
+
+# Gemini / Agent
+.gemini/
+.agent/
+
+# Firebase config (contains API keys)
+firebase-config.js

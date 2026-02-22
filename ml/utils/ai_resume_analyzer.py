@@ -2,7 +2,8 @@ import os
 import streamlit as st
 from dotenv import load_dotenv
 import requests
-import google.generativeai as genai
+from google import genai
+from google.genai import types
 import pdfplumber
 from pdf2image import convert_from_path
 import pytesseract
@@ -22,12 +23,13 @@ class AIResumeAnalyzer:
         self.ollama_base_url = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
         self.model_name = os.getenv("OLLAMA_MODEL", "llama3.2:3b")
         
-        # Gemini Configuration
-        self.gemini_api_key = "AIzaSyCfFlpGMPRqXdbDRV54K4UVr0WJxT3yb4g"
+        # Gemini Configuration (new SDK)
+        self.gemini_api_key = os.getenv("GEMINI_API_KEY", "")
         try:
-             genai.configure(api_key=self.gemini_api_key)
+             self.gemini_client = genai.Client(api_key=self.gemini_api_key)
         except Exception as e:
              print(f"Failed to configure Gemini: {e}")
+             self.gemini_client = None
     
     def analyze_resume_with_ollama(self, resume_text, job_description=None, job_role=None):
         """Analyze resume using Local Ollama (Llama 3.1)"""
@@ -466,8 +468,10 @@ class AIResumeAnalyzer:
             Ensure the response is VALID JSON only. Do not include markdown formatting like ```json or explanations outside the JSON.
             """
             
-            model = genai.GenerativeModel('gemini-flash-latest')
-            response = model.generate_content(user_prompt)
+            response = self.gemini_client.models.generate_content(
+                model='gemini-2.0-flash',
+                contents=user_prompt,
+            )
             
             analysis_text = response.text
             

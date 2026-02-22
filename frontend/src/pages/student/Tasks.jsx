@@ -19,63 +19,44 @@ const Tasks = () => {
     } catch (error) {
       console.error("Error fetching mentors:", error);
       toast.error("Failed to fetch mentors");
-    } finally {
-      setIsLoading(false);
-    }
+    } finally { setIsLoading(false); }
   };
 
   const getSingleStudent = async () => {
     try {
-      const { data } = await axios.get(
-        `http://localhost:5000/student/${studentId}`
-      );
+      const { data } = await axios.get(`http://localhost:5000/student/${studentId}`);
       setStudentData(data);
-    } catch (error) {
-      console.log(error);
-      toast.error("Failed to load student data");
-    }
+    } catch (error) { console.log(error); toast.error("Failed to load student data"); }
   };
 
   const assignTaskToStudent = async (taskId) => {
     try {
-      await axios.post("http://localhost:5000/student/add-task", {
-        taskId,
-        studentId,
-      });
+      await axios.post("http://localhost:5000/student/add-task", { taskId, studentId });
       toast.success("Task assigned successfully");
-      getSingleStudent(); // Refresh student data to update the assigned tasks
-    } catch (error) {
-      toast.error("Failed to assign task");
-      console.error(error);
-    }
+      getSingleStudent();
+    } catch (error) { toast.error("Failed to assign task"); console.error(error); }
   };
 
-  // Check if task is already assigned to the student
   const isTaskAssigned = (taskId) => {
     if (!studentData || !studentData.tasks) return false;
     return studentData.tasks.some((task) => task.task._id === taskId);
   };
 
-  useEffect(() => {
-    fetchMentorsWithTasks();
-    getSingleStudent();
-  }, []);
+  useEffect(() => { fetchMentorsWithTasks(); getSingleStudent(); }, []);
 
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100">
-      
-
+    <div className="min-h-screen" style={{ background: '#ffffff', color: '#111' }}>
       <div className="container mx-auto px-4 py-8">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold flex items-center gap-3">
-            <FaTasks className="text-indigo-400" />
-            Mentor Tasks
+        <div className="flex justify-between items-center mb-8 mt-[50px]">
+          <h1 className="text-3xl font-bold flex items-center gap-3" style={{ color: '#111' }}>
+            <FaTasks style={{ color: '#d4a800' }} />
+            Mentor <span style={{ color: '#d4a800' }}>Tasks</span>
           </h1>
         </div>
 
         {isLoading ? (
           <div className="flex justify-center items-center h-64">
-            <FaSpinner className="animate-spin text-4xl text-indigo-400" />
+            <FaSpinner className="animate-spin text-4xl" style={{ color: '#d4a800' }} />
           </div>
         ) : mentors.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -85,10 +66,11 @@ const Tasks = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3 }}
-                className="bg-gray-800 rounded-lg p-6 shadow-lg border-l-4 border-indigo-500 hover:shadow-xl transition-shadow duration-300"
+                className="rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow duration-300"
+                style={{ background: '#fff', border: '1px solid #e5e5e5', borderLeft: '4px solid #f5c518' }}
               >
                 <div className="flex justify-between items-start mb-4">
-                  <h3 className="text-xl font-semibold">{mentor.name}</h3>
+                  <h3 className="text-xl font-semibold" style={{ color: '#111' }}>{mentor.name}</h3>
                 </div>
 
                 {mentor.tasks && mentor.tasks.length > 0 ? (
@@ -96,61 +78,43 @@ const Tasks = () => {
                     {mentor.tasks.map((task) => {
                       const isAssigned = isTaskAssigned(task._id);
                       return (
-                        <div
-                          key={task._id}
-                          className="bg-gray-700 p-4 rounded-lg relative"
-                        >
+                        <div key={task._id} className="p-4 rounded-lg relative"
+                          style={{ background: '#fafafa', border: '1px solid #e5e5e5' }}>
                           {isAssigned && (
-                            <div className="absolute top-2 right-2 flex items-center text-green-400 text-xs">
+                            <div className="absolute top-2 right-2 flex items-center text-xs" style={{ color: '#16a34a' }}>
                               <FaCheck className="mr-1" /> Added
                             </div>
                           )}
                           <div className="flex justify-between items-start">
-                            <h4 className="font-medium">{task.title}</h4>
+                            <h4 className="font-medium" style={{ color: '#111' }}>{task.title}</h4>
                             <button
-                              onClick={() =>
-                                !isAssigned && assignTaskToStudent(task._id)
-                              }
-                              className={`text-gray-400 transition-colors ${
-                                isAssigned
-                                  ? "cursor-not-allowed opacity-50"
-                                  : "hover:text-green-500"
-                              }`}
-                              title={
-                                isAssigned
-                                  ? "Already added"
-                                  : "Assign to Student"
-                              }
+                              onClick={() => !isAssigned && assignTaskToStudent(task._id)}
+                              className={`transition-colors ${isAssigned ? "cursor-not-allowed opacity-50" : ""}`}
+                              style={{ color: isAssigned ? '#ccc' : '#d4a800' }}
+                              title={isAssigned ? "Already added" : "Assign to Student"}
                               disabled={isAssigned}
                             >
                               {isAssigned ? null : <FaPlus />}
                             </button>
                           </div>
-                          <p className="text-gray-300 text-sm mt-2">
-                            {task.description}
-                          </p>
-                          <p className="text-xs text-gray-400 mt-2">
-                            Created:{" "}
-                            {new Date(task.createdAt).toLocaleDateString()}
+                          <p className="text-sm mt-2" style={{ color: '#666' }}>{task.description}</p>
+                          <p className="text-xs mt-2" style={{ color: '#999' }}>
+                            Created: {new Date(task.createdAt).toLocaleDateString()}
                           </p>
                         </div>
                       );
                     })}
                   </div>
                 ) : (
-                  <p className="text-gray-400 text-center py-4">
-                    No tasks available
-                  </p>
+                  <p className="text-center py-4" style={{ color: '#999' }}>No tasks available</p>
                 )}
               </motion.div>
             ))}
           </div>
         ) : (
-          <div className="text-center py-12 bg-gray-800 rounded-lg">
-            <FaTasks className="mx-auto text-5xl text-gray-500 mb-4" />
-            <h3 className="text-xl font-medium text-gray-300">
-              No mentors found
-            </h3>
+          <div className="text-center py-12 rounded-lg" style={{ background: '#fafafa', border: '1px solid #e5e5e5' }}>
+            <FaTasks className="mx-auto text-5xl mb-4" style={{ color: '#e5e5e5' }} />
+            <h3 className="text-xl font-medium" style={{ color: '#999' }}>No mentors found</h3>
           </div>
         )}
       </div>
@@ -159,4 +123,3 @@ const Tasks = () => {
 };
 
 export default Tasks;
-

@@ -2,7 +2,9 @@ from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 import json
 import os
 import uuid
-import google.generativeai as genai
+from google import genai
+from google.genai import types
+from dotenv import load_dotenv
 from pydantic import BaseModel
 from face_matching_helper import *
 from resume_helper import *
@@ -11,29 +13,29 @@ from fastapi.middleware.cors import CORSMiddleware
 nltk.download("punkt")
 nltk.download("stopwords")
 
-genai.configure(api_key="AIzaSyALQl3IlQPXT_dD8k5kvBA9j3aXenmfDAg")
+# Load environment variables
+load_dotenv()
 
-generation_config = {
-    "temperature": 1,
-    "top_p": 0.95,
-    "top_k": 64,
-    "max_output_tokens": 1024,
-    "response_mime_type": "text/plain",
-}
+# Configure the new Google GenAI client
+client = genai.Client(api_key=os.getenv("GEMINI_API_KEY", ""))
 
-model = genai.GenerativeModel(
-    model_name="gemini-2.5-flash",
-    generation_config=generation_config,
+generation_config = types.GenerateContentConfig(
+    temperature=1,
+    top_p=0.95,
+    top_k=64,
+    max_output_tokens=1024,
 )
+
+MODEL_NAME = "gemini-2.0-flash"
 
 app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Your frontend's URL
+    allow_origins=["*"],
     allow_credentials=True,
-    allow_methods=["*"],  # Allow all HTTP methods (GET, POST, etc.)
-    allow_headers=["*"],  # Allow all headers
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 DATABASE_FILE = "database/embeddings.json"
@@ -46,7 +48,11 @@ if not os.path.exists(DATABASE_FILE):
 def generate_response(text: str):
     prompt = f'''You are a helpful mentor chatbot. Respond to the following in a supportive, educational, and engaging way: {text}'''
     try:
-        response = model.generate_content(prompt)
+        response = client.models.generate_content(
+            model=MODEL_NAME,
+            contents=prompt,
+            config=generation_config,
+        )
         if len(response.text) == 0:
             return "I'm sorry, I don't understand. Can you please rephrase?"
         return response.text
@@ -176,7 +182,11 @@ async def recommend_skills(request: SkillRecommendationRequest):
     prompt = f"List the most important skills required for the job of {job_name}. Return the skills in a comma-separated list."
     
     try:
-        response = model.generate_content(prompt)
+        response = client.models.generate_content(
+            model=MODEL_NAME,
+            contents=prompt,
+            config=generation_config,
+        )
         if len(response.text) == 0:
             return {"message": "No skills found, please rephrase your request."}
         skills = response.text.strip().replace("\n", ", ")
@@ -197,7 +207,11 @@ async def career_guidance(request: CareerGuidanceRequest):
     prompt = f"Given the following skills: {skills} and interests: {interests}, provide a career roadmap in plaintext to help the user develop professionally. Make sure to not use markdown formatting"
     
     try:
-        response = model.generate_content(prompt)
+        response = client.models.generate_content(
+            model=MODEL_NAME,
+            contents=prompt,
+            config=generation_config,
+        )
         if len(response.text) == 0:
             return {"message": "No roadmap found, please rephrase your request."}
         roadmap = response.text.strip()

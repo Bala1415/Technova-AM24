@@ -2,20 +2,10 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Footer from "../components/Footer";
 import {
-  AiOutlineUser,
-  AiOutlineSolution,
-  AiOutlineSchedule,
-  AiOutlineCheckCircle,
-  AiOutlineNotification,
-  AiOutlineTrophy,
-  AiOutlineRobot,
-  AiOutlineCamera,
-  AiOutlineDashboard,
-  AiOutlineFileText,
   AiOutlineTeam,
-  AiOutlineRocket,
-  AiOutlineStar,
-  AiOutlineCloud,
+  AiOutlineRobot,
+  AiOutlineCheckCircle,
+  AiOutlineSolution,
 } from "react-icons/ai";
 import { 
   FaGraduationCap, 
@@ -23,30 +13,21 @@ import {
   FaChalkboardTeacher, 
   FaBrain,
   FaShieldAlt,
-  FaChartLine,
-  FaUsers,
-  FaLightbulb,
   FaNetworkWired,
-  FaMicrochip,
   FaGlobe
 } from "react-icons/fa";
 import { 
   IoSparkles, 
   IoRocket, 
   IoStatsChart, 
-  IoPeople,
-  IoFlash,
   IoPlanet,
-  IoInfinite
 } from "react-icons/io5";
-import { RiUserVoiceFill, RiMindMap, RiGlobalLine } from "react-icons/ri";
+import { RiMindMap } from "react-icons/ri";
 
 const Home = () => {
   const [currentFeature, setCurrentFeature] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    setIsVisible(true);
     const interval = setInterval(() => {
       setCurrentFeature((prev) => (prev + 1) % features.length);
     }, 3000);
@@ -54,10 +35,10 @@ const Home = () => {
   }, []);
 
   const features = [
-    { icon: AiOutlineTeam, title: "Four Role System", color: "from-purple-500 to-pink-500" },
-    { icon: AiOutlineRobot, title: "AI Chatbot Support", color: "from-blue-500 to-cyan-500" },
-    { icon: AiOutlineCheckCircle, title: "Skills Tracking", color: "from-yellow-500 to-orange-500" },
-    { icon: AiOutlineSolution, title: "Career Guidance", color: "from-indigo-500 to-purple-500" }
+    { icon: AiOutlineTeam, title: "Four Role System" },
+    { icon: AiOutlineRobot, title: "AI Chatbot Support" },
+    { icon: AiOutlineCheckCircle, title: "Skills Tracking" },
+    { icon: AiOutlineSolution, title: "Career Guidance" }
   ];
 
   const stats = [
@@ -69,43 +50,20 @@ const Home = () => {
 
   return (
     <>
-      
+      <div className="overflow-hidden" style={{ background: '#ffffff' }}>
 
-      <div className="overflow-hidden bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900">
-        {/* Animated Background */}
-        <div className="fixed inset-0 overflow-hidden">
-          {[...Array(15)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-1 h-1 bg-purple-400 rounded-full"
-              initial={{ 
-                x: Math.random() * window.innerWidth,
-                y: Math.random() * window.innerHeight,
-                scale: 0
-              }}
-              animate={{ 
-                scale: [0, 1, 0],
-                opacity: [0, 0.5, 0]
-              }}
-              transition={{ 
-                duration: Math.random() * 4 + 3,
-                repeat: Infinity,
-                delay: Math.random() * 2
-              }}
-            />
-          ))}
-        </div>
-
-        {/* Hero Section */}
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-          <div className="absolute inset-0 bg-black/40 z-10"></div>
+        {/* Hero Section — Dark hero banner for contrast */}
+        <section className="relative min-h-screen flex items-center justify-center overflow-hidden"
+          style={{ background: '#0a0a0a' }}>
+          <div className="absolute inset-0 z-10" style={{ background: 'rgba(0,0,0,0.65)' }}></div>
           <motion.img
             initial={{ scale: 1.2 }}
             animate={{ scale: 1 }}
             transition={{ duration: 2 }}
             className="absolute top-0 left-0 w-full h-full object-cover"
-            src="https://png.pngtree.com/background/20250111/original/pngtree-abstract-watercolor-texture-in-shades-of-blue-picture-image_15273936.jpg"
-            alt="Mentorship program hero"
+            src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=80"
+            alt="Professional career guidance"
+            style={{ filter: 'grayscale(60%) brightness(0.4)' }}
           />
           
           <div className="relative z-20 text-center px-4 max-w-6xl mx-auto">
@@ -117,21 +75,26 @@ const Home = () => {
             >
               <motion.div
                 whileHover={{ scale: 1.1 }}
-                className="inline-flex items-center gap-3 bg-gradient-to-r from-purple-600/30 to-blue-600/30 p-4 rounded-2xl border border-purple-500/30 backdrop-blur-lg mb-6"
+                className="inline-flex items-center gap-3 p-4 rounded-2xl backdrop-blur-lg mb-6"
+                style={{ background: 'rgba(245, 197, 24, 0.1)', border: '1px solid rgba(245, 197, 24, 0.25)' }}
               >
-                <IoSparkles className="text-2xl text-yellow-400 animate-pulse" />
-                <span className="text-purple-300 font-semibold">Next-Gen Mentorship Platform</span>
+                <IoSparkles className="text-2xl animate-pulse" style={{ color: '#f5c518' }} />
+                <span className="font-semibold" style={{ color: '#f5c518' }}>Next-Gen Career Platform</span>
               </motion.div>
               
               <h1 className="text-5xl md:text-7xl font-bold mb-6">
-                <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+                <span style={{ 
+                  background: 'linear-gradient(135deg, #f5c518, #ffd84d, #d4a800)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent'
+                }}>
                   PathNexusAI
                 </span>
                 <br />
-                <span className="text-white text-4xl md:text-5xl">AI-Powered Learning Ecosystem</span>
+                <span className="text-white text-4xl md:text-5xl">AI-Powered Career Ecosystem</span>
               </h1>
               
-              <p className="text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed" style={{ color: '#ccc' }}>
                 Revolutionizing education through intelligent mentorship, cutting-edge AI, 
                 and immersive learning experiences that transform careers and lives.
               </p>
@@ -147,7 +110,8 @@ const Home = () => {
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
                 href="/register"
-                className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold py-4 px-8 rounded-2xl text-lg transition-all duration-300 shadow-2xl flex items-center gap-2"
+                className="font-bold py-4 px-8 rounded-2xl text-lg transition-all duration-300 shadow-2xl flex items-center gap-2"
+                style={{ background: 'linear-gradient(135deg, #f5c518, #d4a800)', color: '#0a0a0a' }}
               >
                 <IoRocket className="text-xl" />
                 Launch Your Journey
@@ -157,7 +121,8 @@ const Home = () => {
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
                 href="#features"
-                className="bg-gray-800/50 backdrop-blur-lg hover:bg-gray-700/50 text-white font-bold py-4 px-8 rounded-2xl text-lg transition-all duration-300 border border-gray-600/50 flex items-center gap-2"
+                className="backdrop-blur-lg font-bold py-4 px-8 rounded-2xl text-lg transition-all duration-300 flex items-center gap-2"
+                style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', color: '#fff' }}
               >
                 <FaBrain className="text-xl" />
                 Explore Features
@@ -169,7 +134,8 @@ const Home = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1 }}
-              className="bg-gray-800/30 backdrop-blur-lg rounded-2xl p-6 border border-gray-600/30 max-w-2xl mx-auto"
+              className="backdrop-blur-lg rounded-2xl p-6 max-w-2xl mx-auto"
+              style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(245, 197, 24, 0.15)' }}
             >
               <AnimatePresence mode="wait">
                 <motion.div
@@ -180,8 +146,8 @@ const Home = () => {
                   transition={{ duration: 0.5 }}
                   className="flex items-center justify-center gap-4"
                 >
-                  <div className={`p-3 rounded-xl bg-gradient-to-r ${features[currentFeature].color}`}>
-                    {/* <features[currentFeature].icon className="text-2xl text-white" /> */}
+                  <div className="p-3 rounded-xl" style={{ background: 'linear-gradient(135deg, #f5c518, #d4a800)' }}>
+                    {React.createElement(features[currentFeature].icon, { className: "text-2xl", style: { color: '#0a0a0a' } })}
                   </div>
                   <span className="text-white font-semibold text-lg">
                     {features[currentFeature].title}
@@ -192,24 +158,20 @@ const Home = () => {
           </div>
 
           {/* Floating Elements */}
-          <motion.div
-            animate={{ y: [0, -20, 0] }}
-            transition={{ duration: 3, repeat: Infinity }}
-            className="absolute bottom-10 left-10 text-purple-400 text-2xl"
-          >
+          <motion.div animate={{ y: [0, -20, 0] }} transition={{ duration: 3, repeat: Infinity }}
+            className="absolute bottom-10 left-10 text-2xl" style={{ color: '#f5c518' }}>
             <FaGraduationCap />
           </motion.div>
-          <motion.div
-            animate={{ y: [0, 20, 0] }}
-            transition={{ duration: 4, repeat: Infinity, delay: 1 }}
-            className="absolute top-20 right-20 text-blue-400 text-2xl"
-          >
+          <motion.div animate={{ y: [0, 20, 0] }} transition={{ duration: 4, repeat: Infinity, delay: 1 }}
+            className="absolute top-20 right-20 text-2xl" style={{ color: 'rgba(245, 197, 24, 0.5)' }}>
             <FaUserTie />
           </motion.div>
         </section>
 
+        {/* ===== WHITE BACKGROUND SECTIONS BELOW ===== */}
+
         {/* Features Section */}
-        <section id="features" className="py-20 relative">
+        <section id="features" className="py-20 relative" style={{ background: '#ffffff' }}>
           <div className="max-w-7xl mx-auto px-4">
             <motion.div
               initial={{ opacity: 0, y: 50 }}
@@ -217,12 +179,10 @@ const Home = () => {
               transition={{ duration: 0.8 }}
               className="text-center mb-16"
             >
-              <h2 className="text-5xl font-bold mb-4">
-                <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-                  Revolutionary Features
-                </span>
+              <h2 className="text-5xl font-bold mb-4" style={{ color: '#111' }}>
+                Revolutionary <span style={{ color: '#f5c518' }}>Features</span>
               </h2>
-              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              <p className="text-xl max-w-3xl mx-auto" style={{ color: '#666' }}>
                 Experience the future of mentorship with our cutting-edge platform 
                 powered by artificial intelligence and immersive technologies.
               </p>
@@ -235,26 +195,19 @@ const Home = () => {
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  whileHover={{ scale: 1.05, y: -5 }}
-                  className="bg-gray-800/50 backdrop-blur-xl p-8 rounded-3xl border border-gray-700/50 hover:border-purple-500/50 transition-all duration-300 group relative overflow-hidden"
+                  whileHover={{ scale: 1.03, y: -5 }}
+                  className="p-8 rounded-3xl transition-all duration-300 group"
+                  style={{ background: '#fff', border: '1px solid #e5e5e5' }}
+                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#f5c518'; e.currentTarget.style.boxShadow = '0 8px 30px rgba(245,197,24,0.1)'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#e5e5e5'; e.currentTarget.style.boxShadow = 'none'; }}
                 >
-                  {/* Animated Background */}
-                  <div className={`absolute inset-0 bg-gradient-to-r ${feature.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}></div>
-                  
-                  <div className="relative z-10">
-                    <div className={`p-4 rounded-2xl bg-gradient-to-r ${feature.color} w-fit mb-6`}>
-                      <feature.icon className="text-3xl text-white" />
-                    </div>
-                    <h3 className="text-2xl font-semibold mb-4 text-white group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-blue-400 group-hover:bg-clip-text">
-                      {feature.title}
-                    </h3>
-                    <p className="text-gray-300 leading-relaxed">
-                      Advanced AI-powered mentorship with real-time analytics and personalized learning paths.
-                    </p>
+                  <div className="p-4 rounded-2xl w-fit mb-6" style={{ background: 'linear-gradient(135deg, #f5c518, #d4a800)' }}>
+                    <feature.icon className="text-3xl" style={{ color: '#0a0a0a' }} />
                   </div>
-
-                  {/* Hover Effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"></div>
+                  <h3 className="text-2xl font-semibold mb-4" style={{ color: '#111' }}>{feature.title}</h3>
+                  <p style={{ color: '#666' }} className="leading-relaxed">
+                    Advanced AI-powered mentorship with real-time analytics and personalized learning paths.
+                  </p>
                 </motion.div>
               ))}
             </div>
@@ -262,7 +215,7 @@ const Home = () => {
         </section>
 
         {/* Stats Section */}
-        <section className="py-20 bg-gradient-to-r from-gray-900/50 to-purple-900/50 relative">
+        <section className="py-20" style={{ background: '#fafafa' }}>
           <div className="max-w-7xl mx-auto px-4">
             <motion.div
               initial={{ opacity: 0 }}
@@ -277,21 +230,23 @@ const Home = () => {
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.6, delay: index * 0.2 }}
                   whileHover={{ scale: 1.05, y: -5 }}
-                  className="bg-gray-800/30 backdrop-blur-lg p-8 rounded-3xl border border-gray-700/50 text-center group hover:border-purple-500/50 transition-all duration-300"
+                  className="p-8 rounded-3xl text-center transition-all duration-300"
+                  style={{ background: '#fff', border: '1px solid #e5e5e5' }}
+                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#f5c518'; e.currentTarget.style.boxShadow = '0 8px 30px rgba(245,197,24,0.1)'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#e5e5e5'; e.currentTarget.style.boxShadow = 'none'; }}
                 >
                   <div className="flex justify-center mb-4">
-                    <div className="p-3 rounded-xl bg-gradient-to-r from-purple-500/20 to-blue-500/20">
-                      <stat.icon className="text-3xl text-purple-400" />
+                    <div className="p-3 rounded-xl" style={{ background: 'rgba(245, 197, 24, 0.1)' }}>
+                      <stat.icon className="text-3xl" style={{ color: '#d4a800' }} />
                     </div>
                   </div>
-                  <motion.h3 
-                    className="text-5xl font-bold text-transparent bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text mb-2"
+                  <motion.h3 className="text-5xl font-bold mb-2" style={{ color: '#f5c518' }}
                     whileInView={{ scale: [1, 1.1, 1] }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                   >
                     {stat.number}
                   </motion.h3>
-                  <p className="text-gray-300 text-lg">{stat.label}</p>
+                  <p className="text-lg" style={{ color: '#666' }}>{stat.label}</p>
                 </motion.div>
               ))}
             </motion.div>
@@ -299,7 +254,7 @@ const Home = () => {
         </section>
 
         {/* Advanced Features Section */}
-        <section className="py-20">
+        <section className="py-20" style={{ background: '#ffffff' }}>
           <div className="max-w-7xl mx-auto px-4">
             <motion.div
               initial={{ opacity: 0, y: 50 }}
@@ -307,10 +262,8 @@ const Home = () => {
               transition={{ duration: 0.8 }}
               className="text-center mb-16"
             >
-              <h2 className="text-5xl font-bold mb-4">
-                <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                  Advanced Capabilities
-                </span>
+              <h2 className="text-5xl font-bold mb-4" style={{ color: '#111' }}>
+                Advanced <span style={{ color: '#f5c518' }}>Capabilities</span>
               </h2>
             </motion.div>
 
@@ -327,15 +280,18 @@ const Home = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   whileHover={{ scale: 1.02, y: -5 }}
-                  className="bg-gray-800/50 backdrop-blur-lg p-8 rounded-3xl border border-gray-700/50 hover:border-blue-500/50 transition-all duration-300"
+                  className="p-8 rounded-3xl transition-all duration-300"
+                  style={{ background: '#fff', border: '1px solid #e5e5e5' }}
+                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#f5c518'; e.currentTarget.style.boxShadow = '0 6px 25px rgba(245,197,24,0.08)'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#e5e5e5'; e.currentTarget.style.boxShadow = 'none'; }}
                 >
                   <div className="flex items-center mb-4">
-                    <div className="p-3 rounded-xl bg-gradient-to-r from-blue-500/20 to-cyan-500/20 mr-4">
-                      <feature.icon className="text-2xl text-blue-400" />
+                    <div className="p-3 rounded-xl mr-4" style={{ background: 'rgba(245, 197, 24, 0.1)' }}>
+                      <feature.icon className="text-2xl" style={{ color: '#d4a800' }} />
                     </div>
-                    <h3 className="text-2xl font-semibold text-white">{feature.title}</h3>
+                    <h3 className="text-2xl font-semibold" style={{ color: '#111' }}>{feature.title}</h3>
                   </div>
-                  <p className="text-gray-300 leading-relaxed">{feature.desc}</p>
+                  <p style={{ color: '#666' }} className="leading-relaxed">{feature.desc}</p>
                 </motion.div>
               ))}
             </div>
@@ -343,8 +299,7 @@ const Home = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 via-blue-600/20 to-cyan-600/20"></div>
+        <section className="py-20 relative overflow-hidden" style={{ background: '#fafafa' }}>
           <div className="relative z-10 max-w-6xl mx-auto text-center px-4">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
@@ -356,14 +311,14 @@ const Home = () => {
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                 className="inline-block mb-6"
               >
-                <IoPlanet className="text-6xl text-purple-400" />
+                <IoPlanet className="text-6xl" style={{ color: '#f5c518' }} />
               </motion.div>
               
-              <h2 className="text-5xl font-bold mb-6 text-white">
-                Join the <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Future</span> of Education
+              <h2 className="text-5xl font-bold mb-6" style={{ color: '#111' }}>
+                Join the <span style={{ color: '#f5c518' }}>Future</span> of Education
               </h2>
               
-              <p className="text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
+              <p className="text-xl mb-8 max-w-2xl mx-auto" style={{ color: '#666' }}>
                 Be part of a revolutionary platform that's transforming how students learn 
                 and mentors teach through cutting-edge technology and AI.
               </p>
@@ -375,16 +330,21 @@ const Home = () => {
                 className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-2xl mx-auto"
               >
                 {[
-                  { role: "Student", icon: FaGraduationCap, color: "from-purple-500 to-pink-500" },
-                  { role: "College Mentor", icon: FaChalkboardTeacher, color: "from-blue-500 to-cyan-500" },
-                  { role: "Industry Mentor", icon: FaUserTie, color: "from-green-500 to-emerald-500" }
+                  { role: "Student", icon: FaGraduationCap },
+                  { role: "College Mentor", icon: FaChalkboardTeacher },
+                  { role: "Industry Mentor", icon: FaUserTie }
                 ].map((item, index) => (
                   <motion.a
                     key={item.role}
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.95 }}
                     href="/register"
-                    className={`bg-gradient-to-r ${item.color} hover:shadow-2xl text-white font-bold py-4 px-6 rounded-2xl transition-all duration-300 flex items-center justify-center gap-2`}
+                    className="font-bold py-4 px-6 rounded-2xl transition-all duration-300 flex items-center justify-center gap-2"
+                    style={
+                      index === 0
+                        ? { background: 'linear-gradient(135deg, #f5c518, #d4a800)', color: '#0a0a0a' }
+                        : { background: '#fff', color: '#111', border: '1px solid #e5e5e5' }
+                    }
                   >
                     <item.icon />
                     {item.role}

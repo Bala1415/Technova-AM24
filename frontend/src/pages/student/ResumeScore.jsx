@@ -10,151 +10,131 @@ const ResumeScore = () => {
     const [jobRole, setJobRole] = useState('');
 
     const handleFileChange = (e) => {
-        if (e.target.files) {
-            setFile(e.target.files[0]);
-            setError(null);
-        }
+        if (e.target.files) { setFile(e.target.files[0]); setError(null); }
     };
 
     const handleAnalyze = async () => {
-        if (!file) {
-            setError("Please upload a file first.");
-            return;
-        }
-
-        setAnalyzing(true);
-        setError(null);
+        if (!file) { setError("Please upload a file first."); return; }
+        setAnalyzing(true); setError(null);
         const formData = new FormData();
         formData.append('file', file);
         formData.append('job_role', jobRole);
-
         try {
-            // Updated to point to the main ML server port 8000
             const response = await axios.post('http://localhost:8000/analyze-resume', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
+                headers: { 'Content-Type': 'multipart/form-data' },
             });
             setResults(response.data);
         } catch (err) {
             console.error(err);
             setError("Analysis failed. Ensure the backend is running.");
-        } finally {
-            setAnalyzing(false);
-        }
+        } finally { setAnalyzing(false); }
     };
 
     return (
-        <div className="min-h-screen bg-gray-50 p-8">
-            <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-md p-8 mt-[80px]">
-                <header className="mb-8 border-b pb-4">
-                    <h1 className="text-2xl font-bold text-gray-800">AI Resume Analyzer</h1>
-                    <p className="text-gray-600">Upload your resume to get instant feedback and ATS scoring.</p>
+        <div className="min-h-screen p-8" style={{ background: '#ffffff' }}>
+            <div className="max-w-4xl mx-auto rounded-xl shadow-lg p-8 mt-[80px]"
+                style={{ background: '#fff', border: '1px solid #e5e5e5' }}>
+                <header className="mb-8 pb-4" style={{ borderBottom: '1px solid #e5e5e5' }}>
+                    <h1 className="text-2xl font-bold" style={{ color: '#111' }}>AI Resume <span style={{ color: '#d4a800' }}>Analyzer</span></h1>
+                    <p style={{ color: '#666' }}>Upload your resume to get instant feedback and ATS scoring.</p>
                 </header>
 
                 <div className="space-y-6">
-                    {/* Input Section */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">Target Job Role</label>
-                            <input 
-                                type="text"
-                                className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                            <label className="block text-sm font-medium mb-2" style={{ color: '#333' }}>Target Job Role</label>
+                            <input type="text" className="w-full p-2 rounded-lg focus:outline-none transition-all"
+                                style={{ background: '#fafafa', border: '1px solid #e5e5e5', color: '#111' }}
+                                onFocus={(e) => { e.target.style.borderColor = '#f5c518'; e.target.style.boxShadow = '0 0 0 2px rgba(245,197,24,0.15)'; }}
+                                onBlur={(e) => { e.target.style.borderColor = '#e5e5e5'; e.target.style.boxShadow = 'none'; }}
                                 placeholder="e.g. Full Stack Developer"
-                                value={jobRole}
-                                onChange={(e) => setJobRole(e.target.value)}
-                            />
+                                value={jobRole} onChange={(e) => setJobRole(e.target.value)} />
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">Upload Resume (PDF/DOCX)</label>
+                            <label className="block text-sm font-medium mb-2" style={{ color: '#333' }}>Upload Resume (PDF/DOCX)</label>
                             <div className="flex items-center justify-center w-full">
-                                <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
+                                <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-lg cursor-pointer transition-colors"
+                                    style={{ borderColor: '#e5e5e5', background: '#fafafa' }}
+                                    onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#f5c518'; }}
+                                    onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#e5e5e5'; }}>
                                     <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                                        <Upload className="w-8 h-8 mb-3 text-gray-400" />
-                                        <p className="text-sm text-gray-500"><span className="font-semibold">Click to upload</span> or drag and drop</p>
-                                        <p className="text-xs text-gray-500">PDF or DOCX (MAX. 5MB)</p>
+                                        <Upload className="w-8 h-8 mb-3" style={{ color: '#d4a800' }} />
+                                        <p className="text-sm" style={{ color: '#666' }}><span className="font-semibold">Click to upload</span> or drag and drop</p>
+                                        <p className="text-xs" style={{ color: '#999' }}>PDF or DOCX (MAX. 5MB)</p>
                                     </div>
                                     <input type="file" className="hidden" onChange={handleFileChange} accept=".pdf,.docx" />
                                 </label>
                             </div>
-                            {file && <p className="text-sm text-green-600 mt-2 flex items-center"><CheckCircle className="w-4 h-4 mr-1"/> Selected: {file.name}</p>}
+                            {file && <p className="text-sm mt-2 flex items-center" style={{ color: '#16a34a' }}><CheckCircle className="w-4 h-4 mr-1"/>Selected: {file.name}</p>}
                         </div>
                     </div>
 
-                    <button 
-                        onClick={handleAnalyze} 
-                        disabled={analyzing || !file}
-                        className={`w-full py-3 rounded-lg text-white font-semibold transition-colors ${analyzing || !file ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'}`}
-                    >
+                    <button onClick={handleAnalyze} disabled={analyzing || !file}
+                        className="w-full py-3 rounded-lg font-bold transition-all"
+                        style={analyzing || !file
+                            ? { background: '#f5f5f5', color: '#999', cursor: 'not-allowed' }
+                            : { background: 'linear-gradient(135deg, #f5c518, #d4a800)', color: '#0a0a0a' }
+                        }>
                         {analyzing ? <span className="flex items-center justify-center"><Loader2 className="w-5 h-5 mr-2 animate-spin"/> Analyzing...</span> : 'Analyze Resume'}
                     </button>
 
                     {error && (
-                        <div className="p-4 bg-red-50 text-red-700 rounded-lg flex items-center">
-                            <AlertCircle className="w-5 h-5 mr-2" />
-                            {error}
+                        <div className="p-4 rounded-lg flex items-center" style={{ background: '#fef2f2', color: '#dc2626', border: '1px solid #fecaca' }}>
+                            <AlertCircle className="w-5 h-5 mr-2" /> {error}
                         </div>
                     )}
 
                     {results && (results.error || results.ai_analysis?.error) && (
-                        <div className="p-4 bg-red-50 text-red-700 rounded-lg flex items-center mt-4">
-                            <AlertCircle className="w-5 h-5 mr-2" />
-                            Backend Error: {results.error || results.ai_analysis?.error}
+                        <div className="p-4 rounded-lg flex items-center mt-4" style={{ background: '#fef2f2', color: '#dc2626', border: '1px solid #fecaca' }}>
+                            <AlertCircle className="w-5 h-5 mr-2" /> Backend Error: {results.error || results.ai_analysis?.error}
                         </div>
                     )}
                 </div>
 
-                {/* Results Section */}
                 {results && (
-                    <div className="mt-10 space-y-8 animate-fade-in">
-                        <div className="bg-blue-50 p-6 rounded-lg border border-blue-100">
-                            <h2 className="text-xl font-bold text-blue-900 mb-4">Analysis Results</h2>
-                            
+                    <div className="mt-10 space-y-8">
+                        <div className="p-6 rounded-lg" style={{ background: '#fffbeb', border: '1px solid #fde68a' }}>
+                            <h2 className="text-xl font-bold mb-4" style={{ color: '#92400e' }}>Analysis Results</h2>
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-                                {/* ATS Score Card */}
-                                <div className="bg-white p-4 rounded-lg shadow-sm">
-                                    <p className="text-gray-500 text-sm mb-1">ATS Score</p>
-                                    <div className="text-4xl font-bold text-blue-600">
+                                <div className="p-4 rounded-lg shadow-sm" style={{ background: '#fff', border: '1px solid #e5e5e5' }}>
+                                    <p className="text-sm mb-1" style={{ color: '#999' }}>ATS Score</p>
+                                    <div className="text-4xl font-bold" style={{ color: '#d4a800' }}>
                                         {results.ai_analysis?.ats_score || results.static_analysis?.ats_score || 0}%
                                     </div>
                                 </div>
-                                
-                                {/* Resume Score Card */}
-                                <div className="bg-white p-4 rounded-lg shadow-sm">
-                                    <p className="text-gray-500 text-sm mb-1">Overall Quality</p>
-                                    <div className="text-4xl font-bold text-green-600">
+                                <div className="p-4 rounded-lg shadow-sm" style={{ background: '#fff', border: '1px solid #e5e5e5' }}>
+                                    <p className="text-sm mb-1" style={{ color: '#999' }}>Overall Quality</p>
+                                    <div className="text-4xl font-bold" style={{ color: '#16a34a' }}>
                                         {results.ai_analysis?.resume_score || results.static_analysis?.section_score || 0}/100
                                     </div>
                                 </div>
-
-                                <div className="bg-white p-4 rounded-lg shadow-sm">
-                                    <p className="text-gray-500 text-sm mb-1">Missing Skills</p>
-                                    <div className="text-2xl font-bold text-orange-600">
+                                <div className="p-4 rounded-lg shadow-sm" style={{ background: '#fff', border: '1px solid #e5e5e5' }}>
+                                    <p className="text-sm mb-1" style={{ color: '#999' }}>Missing Skills</p>
+                                    <div className="text-2xl font-bold" style={{ color: '#ea580c' }}>
                                         {results.static_analysis?.keyword_match?.missing_skills?.length || 0} found
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        {/* AI Feedback */}
                         {results.ai_analysis?.analysis && (
                             <div className="prose max-w-none">
-                                <h3 className="text-lg font-semibold text-gray-800">Detailed Feedback</h3>
-                                <div className="bg-gray-50 p-6 rounded-lg whitespace-pre-line text-gray-700">
+                                <h3 className="text-lg font-semibold" style={{ color: '#111' }}>Detailed Feedback</h3>
+                                <div className="p-6 rounded-lg whitespace-pre-line" style={{ background: '#fafafa', color: '#555', border: '1px solid #e5e5e5' }}>
                                     {results.ai_analysis.analysis}
                                 </div>
                             </div>
                         )}
-                        
-                        {/* Static Suggestions */}
+
                         {results.static_analysis?.suggestions && (
                             <div>
-                                <h3 className="text-lg font-semibold text-gray-800 mb-3">Improvement Suggestions</h3>
+                                <h3 className="text-lg font-semibold mb-3" style={{ color: '#111' }}>Improvement Suggestions</h3>
                                 <ul className="space-y-2">
                                     {results.static_analysis.suggestions.map((suggestion, idx) => (
-                                        <li key={idx} className="flex items-start bg-orange-50 p-3 rounded-lg">
-                                            <AlertCircle className="w-5 h-5 text-orange-500 mr-2 flex-shrink-0 mt-0.5" />
-                                            <span className="text-gray-700">{suggestion}</span>
+                                        <li key={idx} className="flex items-start p-3 rounded-lg"
+                                            style={{ background: '#fffbeb', border: '1px solid #fde68a' }}>
+                                            <AlertCircle className="w-5 h-5 mr-2 flex-shrink-0 mt-0.5" style={{ color: '#d4a800' }} />
+                                            <span style={{ color: '#555' }}>{suggestion}</span>
                                         </li>
                                     ))}
                                 </ul>

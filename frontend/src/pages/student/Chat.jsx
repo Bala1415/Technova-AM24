@@ -187,7 +187,7 @@ const Chat = () => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 min-h-screen flex overflow-hidden">
+    <div className="min-h-screen flex overflow-hidden" style={{ background: '#ffffff' }}>
       <Navbar />
       <ToastContainer />
 
@@ -196,7 +196,7 @@ const Chat = () => {
         initial={{ x: -100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.6, type: "spring" }}
-        className="w-96 bg-gradient-to-b from-gray-800/90 to-gray-900/90 backdrop-blur-xl p-6 border-r border-gray-700/50 shadow-2xl overflow-y-auto"
+        className="w-96 backdrop-blur-xl p-6 overflow-y-auto" style={{ background: '#fafafa', borderRight: '1px solid #e5e5e5' }}
       >
         {/* Header */}
         <div className="mb-8 mt-20">
@@ -210,7 +210,7 @@ const Chat = () => {
           </motion.div>
 
           {/* Category Selector */}
-          <div className="flex bg-gray-700/50 rounded-xl p-1 mb-6 backdrop-blur-sm">
+          <div className="flex rounded-xl p-1 mb-6" style={{ background: '#f5f5f5' }}>
             {[
               { id: "industry", label: "Industry", icon: <FaBriefcase /> },
               { id: "college", label: "College", icon: <RiUserStarFill /> },
@@ -219,11 +219,11 @@ const Chat = () => {
               <button
                 key={category.id}
                 onClick={() => setActiveCategory(category.id)}
-                className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-lg transition-all duration-300 ${
-                  activeCategory === category.id
-                    ? `bg-gradient-to-r ${getCategoryColor(category.id)} shadow-lg`
-                    : "text-gray-400 hover:text-gray-200"
-                }`}
+                className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-lg transition-all duration-300`}
+                style={activeCategory === category.id
+                  ? { background: 'linear-gradient(135deg, #f5c518, #d4a800)', color: '#0a0a0a', boxShadow: '0 4px 12px rgba(245,197,24,0.3)' }
+                  : { color: '#999' }
+                }
               >
                 {category.icon}
                 <span className="text-sm font-medium">{category.label}</span>
@@ -265,9 +265,13 @@ const Chat = () => {
                     whileHover={{ scale: 1.02, y: -2 }}
                     className={`relative p-4 rounded-2xl cursor-pointer transition-all duration-300 group backdrop-blur-sm ${
                       selectedMentor?._id === mentor._id
-                        ? `bg-gradient-to-r ${getCategoryColor(activeCategory)} shadow-xl`
-                        : "bg-gray-700/30 hover:bg-gray-700/50 border border-gray-600/30"
+                        ? 'shadow-xl'
+                        : ''
                     }`}
+                    style={selectedMentor?._id === mentor._id
+                      ? { background: 'linear-gradient(135deg, #f5c518, #d4a800)', color: '#0a0a0a' }
+                      : { background: '#fff', border: '1px solid #e5e5e5' }
+                    }
                     onClick={() => loadMessages(mentor._id, mentor.role)}
                   >
                     {/* Favorite Star */}
@@ -291,16 +295,16 @@ const Chat = () => {
                         selectedMentor?._id === mentor._id ? 
                         "ring-2 ring-white/20" : "ring-2 ring-gray-600/30"
                       } rounded-full p-0.5`}>
-                        <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
-                          <FaUserCircle className="text-2xl text-white" />
+                    <div className="w-12 h-12 rounded-full flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #f5c518, #d4a800)' }}>
+                          <FaUserCircle className="text-2xl" style={{ color: '#0a0a0a' }} />
                         </div>
                         {/* Online Indicator */}
-                        <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-400 rounded-full ring-2 ring-gray-900"></div>
+                        <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-400 rounded-full ring-2 ring-white"></div>
                       </div>
 
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2">
-                          <span className="font-semibold text-gray-100 truncate">
+                          <span className="font-semibold truncate" style={{ color: selectedMentor?._id === mentor._id ? '#0a0a0a' : '#111' }}>
                             {mentor.name}
                           </span>
                           {mentor.expertise && (
@@ -336,13 +340,12 @@ const Chat = () => {
         initial={{ x: 100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.6, type: "spring" }}
-        className="flex-1 flex flex-col bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-xl p-6 relative overflow-hidden"
+        className="flex-1 flex flex-col p-6 relative overflow-hidden" style={{ background: '#fff' }}
       >
         {/* Animated Background Elements */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-20 -right-20 w-40 h-40 bg-purple-500/10 rounded-full blur-xl"></div>
-          <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-blue-500/10 rounded-full blur-xl"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-60 h-60 bg-green-500/5 rounded-full blur-2xl"></div>
+          <div className="absolute -top-20 -right-20 w-40 h-40 rounded-full blur-xl" style={{ background: 'rgba(245,197,24,0.05)' }}></div>
+          <div className="absolute -bottom-20 -left-20 w-40 h-40 rounded-full blur-xl" style={{ background: 'rgba(245,197,24,0.03)' }}></div>
         </div>
 
         {selectedMentor ? (
@@ -351,26 +354,26 @@ const Chat = () => {
             <motion.div
               initial={{ y: -50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              className="flex items-center justify-between border-b border-gray-700/50 pb-4 mb-4 mt-[50px] relative z-10"
+              className="flex items-center justify-between pb-4 mb-4 mt-[50px] relative z-10" style={{ borderBottom: '1px solid #e5e5e5' }}
             >
               <div className="flex items-center gap-4">
                 <div className="relative">
-                  <div className="w-14 h-14 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center ring-4 ring-purple-500/20">
-                    <FaUserCircle className="text-3xl text-white" />
+                  <div className="w-14 h-14 rounded-full flex items-center justify-center ring-4" style={{ background: 'linear-gradient(135deg, #f5c518, #d4a800)', ringColor: 'rgba(245,197,24,0.2)' }}>
+                    <FaUserCircle className="text-3xl" style={{ color: '#0a0a0a' }} />
                   </div>
-                  <div className="absolute bottom-0 right-0 w-4 h-4 bg-green-400 rounded-full ring-2 ring-gray-900"></div>
+                  <div className="absolute bottom-0 right-0 w-4 h-4 bg-green-400 rounded-full ring-2 ring-white"></div>
                 </div>
                 <div>
                   <div className="flex items-center gap-3">
-                    <h2 className="text-2xl font-bold text-gray-100">
+                    <h2 className="text-2xl font-bold" style={{ color: '#111' }}>
                       {selectedMentor.name}
                     </h2>
-                    <div className="flex items-center gap-1 px-2 py-1 bg-gradient-to-r from-purple-600/30 to-pink-600/30 rounded-full">
+                    <div className="flex items-center gap-1 px-2 py-1 rounded-full" style={{ background: 'rgba(245,197,24,0.15)' }}>
                       <FaCrown className="text-yellow-400 text-xs" />
-                      <span className="text-xs text-gray-200">Pro Mentor</span>
+                      <span className="text-xs" style={{ color: '#92400e' }}>Pro Mentor</span>
                     </div>
                   </div>
-                  <p className="text-sm text-gray-400 flex items-center gap-2">
+                  <p className="text-sm flex items-center gap-2" style={{ color: '#999' }}>
                     <span>{selectedMentor.role.replace(/([A-Z])/g, ' $1').trim()}</span>
                     <span className="w-1 h-1 bg-gray-500 rounded-full"></span>
                     <span className="flex items-center gap-1">
@@ -420,16 +423,19 @@ const Chat = () => {
                       }`}
                     >
                       <div
-                        className={`relative max-w-md rounded-3xl p-4 backdrop-blur-sm border ${
+                        className={`relative max-w-md rounded-3xl p-4 ${
                           msg.sender === user._id
-                            ? "bg-gradient-to-br from-blue-600 to-purple-600 rounded-br-none shadow-lg"
-                            : "bg-gray-700/50 border-gray-600/30 rounded-bl-none shadow-lg"
+                            ? "rounded-br-none shadow-lg"
+                            : "rounded-bl-none shadow-lg"
                         }`}
+                      style={msg.sender === user._id
+                        ? { background: 'linear-gradient(135deg, #f5c518, #d4a800)', color: '#0a0a0a' }
+                        : { background: '#fafafa', border: '1px solid #e5e5e5', color: '#333' }
+                      }
                       >
-                        <p className="text-gray-100">{msg.message}</p>
-                        <div className={`flex items-center justify-between mt-2 text-xs ${
-                          msg.sender === user._id ? "text-blue-100" : "text-gray-400"
-                        }`}>
+                        <p style={{ color: 'inherit' }}>{msg.message}</p>
+                        <div className={`flex items-center justify-between mt-2 text-xs`}
+                          style={{ opacity: 0.7 }}>
                           <span>
                             {new Date(msg.createdAt).toLocaleTimeString([], {
                               hour: "2-digit",
@@ -459,7 +465,7 @@ const Chat = () => {
               initial={{ y: 50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.3 }}
-              className="border-t border-gray-700/50 pt-4 flex items-center gap-3 relative z-10"
+              className="pt-4 flex items-center gap-3 relative z-10" style={{ borderTop: '1px solid #e5e5e5' }}
             >
               <div className="flex-1 relative">
                 <input
@@ -468,7 +474,10 @@ const Chat = () => {
                   value={newMessage}
                   onChange={(e) => setNewMessage(e.target.value)}
                   onKeyPress={(e) => e.key === "Enter" && sendMessage()}
-                  className="w-full p-4 bg-gray-700/50 backdrop-blur-sm text-gray-100 border border-gray-600/30 rounded-2xl focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent pr-12 transition-all duration-300"
+                  className="w-full p-4 border rounded-2xl focus:outline-none focus:ring-2 pr-12 transition-all duration-300"
+                  style={{ background: '#fafafa', border: '1px solid #e5e5e5', color: '#111' }}
+                  onFocus={(e) => { e.target.style.borderColor = '#f5c518'; e.target.style.boxShadow = '0 0 0 2px rgba(245,197,24,0.15)'; }}
+                  onBlur={(e) => { e.target.style.borderColor = '#e5e5e5'; e.target.style.boxShadow = 'none'; }}
                 />
                 <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center gap-2">
                   <button className="p-2 rounded-xl bg-gray-600/50 hover:bg-gray-600/80 transition-all">
@@ -483,9 +492,13 @@ const Chat = () => {
                 disabled={!newMessage.trim()}
                 className={`p-4 rounded-2xl flex items-center gap-2 transition-all duration-300 ${
                   newMessage.trim()
-                    ? "bg-gradient-to-r from-purple-600 to-pink-600 shadow-lg hover:shadow-xl"
-                    : "bg-gray-700/50 text-gray-500 cursor-not-allowed"
+                    ? "shadow-lg hover:shadow-xl"
+                    : "cursor-not-allowed"
                 }`}
+                style={newMessage.trim()
+                  ? { background: 'linear-gradient(135deg, #f5c518, #d4a800)', color: '#0a0a0a' }
+                  : { background: '#f5f5f5', color: '#999' }
+                }
               >
                 <FaPaperPlane />
                 <span className="font-medium">Send</span>
@@ -503,10 +516,10 @@ const Chat = () => {
                 <RiSparkling2Fill className="text-8xl text-purple-400/50 animate-pulse" />
                 <IoSparkles className="absolute top-2 right-2 text-2xl text-yellow-400 animate-bounce" />
               </div>
-              <h3 className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-4">
-                Welcome to Connect
+              <h3 className="text-3xl font-bold mb-4" style={{ color: '#111' }}>
+                Welcome to <span style={{ color: '#d4a800' }}>Connect</span>
               </h3>
-              <p className="text-gray-400 text-lg mb-6">
+              <p className="text-lg mb-6" style={{ color: '#999' }}>
                 Select a mentor from the sidebar to start an inspiring conversation and unlock your potential!
               </p>
               <div className="flex justify-center gap-4">
@@ -534,15 +547,15 @@ const Chat = () => {
           width: 6px;
         }
         .custom-scrollbar::-webkit-scrollbar-track {
-          background: rgba(75, 85, 99, 0.3);
+          background: rgba(245, 197, 24, 0.05);
           border-radius: 10px;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: rgba(139, 92, 246, 0.5);
+          background: rgba(245, 197, 24, 0.3);
           border-radius: 10px;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: rgba(139, 92, 246, 0.7);
+          background: rgba(245, 197, 24, 0.5);
         }
       `}</style>
     </div>

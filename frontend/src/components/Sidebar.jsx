@@ -21,6 +21,7 @@ const Sidebar = () => {
     { path: '/resume-builder', icon: '📝', label: 'Resume Builder' },
     { path: '/Quiz', icon: '📝', label: 'Quiz' },
     { path: '/certification', icon: '🏆', label: 'Certification' },
+    { path: '/exam-prep', icon: '📋', label: 'Exam Prep' },
   ];
 
   const mentorItems = [
@@ -42,20 +43,25 @@ const Sidebar = () => {
       <motion.div
         initial={{ x: -300 }}
         animate={{ x: isOpen ? 0 : -280 }}
-        className="fixed left-0 top-0 h-screen bg-gradient-to-b from-purple-900 via-purple-800 to-indigo-900 text-white shadow-2xl z-50"
-        style={{ width: '300px' }}
+        className="fixed left-0 top-0 h-screen text-white shadow-2xl z-50"
+        style={{ 
+          width: '300px',
+          background: 'linear-gradient(180deg, #0a0a0a 0%, #111111 50%, #0a0a0a 100%)',
+          borderRight: '1px solid rgba(245, 197, 24, 0.1)'
+        }}
       >
         {/* Header */}
-        <div className="p-6 border-b border-purple-700">
+        <div className="p-6" style={{ borderBottom: '1px solid rgba(245, 197, 24, 0.15)' }}>
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-purple-400 to-pink-400 rounded-lg flex items-center justify-center text-2xl">
+              <div className="w-10 h-10 rounded-lg flex items-center justify-center text-2xl"
+                style={{ background: 'linear-gradient(135deg, #f5c518, #d4a800)' }}>
                 🎓
               </div>
               {isOpen && (
                 <div>
-                  <h1 className="text-xl font-bold">PathNexus</h1>
-                  <p className="text-xs text-purple-300">AI Career Guide</p>
+                  <h1 className="text-xl font-bold" style={{ color: '#f5c518' }}>PathNexus</h1>
+                  <p className="text-xs" style={{ color: '#888' }}>AI Career Guide</p>
                 </div>
               )}
             </div>
@@ -64,20 +70,33 @@ const Sidebar = () => {
 
         {/* Menu Items */}
         <nav className="p-4 overflow-y-auto h-[calc(100vh-240px)]">
-          <div className="space-y-2">
+          <div className="space-y-1">
             {menuItems.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
-                className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition-all ${
+                className="flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200"
+                style={
                   isActive(item.path)
-                    ? 'bg-gradient-to-r from-purple-600 to-pink-600 shadow-lg scale-105'
-                    : 'hover:bg-purple-700/50'
-                }`}
+                    ? { background: 'linear-gradient(135deg, rgba(245, 197, 24, 0.15), rgba(245, 197, 24, 0.05))', borderLeft: '3px solid #f5c518', color: '#f5c518' }
+                    : { color: '#ccc', borderLeft: '3px solid transparent' }
+                }
+                onMouseEnter={(e) => {
+                  if (!isActive(item.path)) {
+                    e.currentTarget.style.background = 'rgba(255,255,255,0.04)';
+                    e.currentTarget.style.color = '#fff';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!isActive(item.path)) {
+                    e.currentTarget.style.background = 'transparent';
+                    e.currentTarget.style.color = '#ccc';
+                  }
+                }}
               >
-                <span className="text-2xl">{item.icon}</span>
+                <span className="text-xl">{item.icon}</span>
                 {isOpen && (
-                  <span className="font-medium">{item.label}</span>
+                  <span className="font-medium text-sm">{item.label}</span>
                 )}
               </Link>
             ))}
@@ -86,18 +105,20 @@ const Sidebar = () => {
             <div>
               <button
                 onClick={() => setMentorsExpanded(!mentorsExpanded)}
-                className={`w-full flex items-center justify-between px-4 py-3 rounded-lg transition-all ${
+                className="w-full flex items-center justify-between px-4 py-3 rounded-lg transition-all duration-200"
+                style={
                   isMentorActive
-                    ? 'bg-gradient-to-r from-purple-600 to-pink-600 shadow-lg'
-                    : 'hover:bg-purple-700/50'
-                }`}
+                    ? { background: 'rgba(245, 197, 24, 0.1)', color: '#f5c518', borderLeft: '3px solid #f5c518' }
+                    : { color: '#ccc', borderLeft: '3px solid transparent' }
+                }
               >
                 <div className="flex items-center space-x-3">
-                  <span className="text-2xl">👥</span>
-                  {isOpen && <span className="font-medium">Mentors</span>}
+                  <span className="text-xl">👥</span>
+                  {isOpen && <span className="font-medium text-sm">Mentors</span>}
                 </div>
                 {isOpen && (
-                  <span className={`transition-transform ${mentorsExpanded ? 'rotate-180' : ''}`}>
+                  <span className={`transition-transform text-xs ${mentorsExpanded ? 'rotate-180' : ''}`}
+                    style={{ color: '#888' }}>
                     ▼
                   </span>
                 )}
@@ -111,18 +132,19 @@ const Sidebar = () => {
                     exit={{ height: 0, opacity: 0 }}
                     className="overflow-hidden"
                   >
-                    <div className="ml-4 mt-2 space-y-2">
+                    <div className="ml-4 mt-1 space-y-1">
                       {mentorItems.map((item) => (
                         <Link
                           key={item.path}
                           to={item.path}
-                          className={`flex items-center space-x-3 px-4 py-2 rounded-lg transition-all ${
+                          className="flex items-center space-x-3 px-4 py-2 rounded-lg transition-all duration-200"
+                          style={
                             isActive(item.path)
-                              ? 'bg-purple-600 shadow-md'
-                              : 'hover:bg-purple-700/50'
-                          }`}
+                              ? { background: 'rgba(245, 197, 24, 0.1)', color: '#f5c518' }
+                              : { color: '#999' }
+                          }
                         >
-                          <span className="text-xl">{item.icon}</span>
+                          <span className="text-lg">{item.icon}</span>
                           <span className="font-medium text-sm">{item.label}</span>
                         </Link>
                       ))}
@@ -132,20 +154,36 @@ const Sidebar = () => {
               </AnimatePresence>
             </div>
 
+            {/* Divider */}
+            <div className="my-3" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}></div>
+
             {/* Bottom Items */}
             {bottomItems.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
-                className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition-all ${
+                className="flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200"
+                style={
                   isActive(item.path)
-                    ? 'bg-gradient-to-r from-purple-600 to-pink-600 shadow-lg scale-105'
-                    : 'hover:bg-purple-700/50'
-                }`}
+                    ? { background: 'linear-gradient(135deg, rgba(245, 197, 24, 0.15), rgba(245, 197, 24, 0.05))', borderLeft: '3px solid #f5c518', color: '#f5c518' }
+                    : { color: '#ccc', borderLeft: '3px solid transparent' }
+                }
+                onMouseEnter={(e) => {
+                  if (!isActive(item.path)) {
+                    e.currentTarget.style.background = 'rgba(255,255,255,0.04)';
+                    e.currentTarget.style.color = '#fff';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!isActive(item.path)) {
+                    e.currentTarget.style.background = 'transparent';
+                    e.currentTarget.style.color = '#ccc';
+                  }
+                }}
               >
-                <span className="text-2xl">{item.icon}</span>
+                <span className="text-xl">{item.icon}</span>
                 {isOpen && (
-                  <span className="font-medium">{item.label}</span>
+                  <span className="font-medium text-sm">{item.label}</span>
                 )}
               </Link>
             ))}
@@ -155,28 +193,39 @@ const Sidebar = () => {
         {/* Toggle Button */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="absolute -right-4 top-20 bg-purple-600 hover:bg-purple-700 text-white rounded-full p-2 shadow-lg transition-all"
+          className="absolute -right-4 top-20 rounded-full p-2 shadow-lg transition-all"
+          style={{ 
+            background: '#1a1a1a', 
+            border: '1px solid rgba(245, 197, 24, 0.3)',
+            color: '#f5c518'
+          }}
         >
           {isOpen ? '◀' : '▶'}
         </button>
 
         {/* Footer */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-purple-700 bg-purple-900">
-          <Link to="/profile" className="flex items-center space-x-3 px-4 hover:bg-purple-700/50 rounded-lg py-2 transition-all">
-            <div className="w-10 h-10 bg-gradient-to-br from-pink-400 to-purple-400 rounded-full flex items-center justify-center">
+        <div className="absolute bottom-0 left-0 right-0 p-4"
+          style={{ borderTop: '1px solid rgba(245, 197, 24, 0.1)', background: '#0a0a0a' }}>
+          <Link to="/profile" className="flex items-center space-x-3 px-4 rounded-lg py-2 transition-all"
+            style={{ color: '#ccc' }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.04)'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; }}
+          >
+            <div className="w-10 h-10 rounded-full flex items-center justify-center"
+              style={{ background: 'linear-gradient(135deg, #f5c518, #d4a800)' }}>
               👤
             </div>
             {isOpen && (
               <div>
-                <p className="font-semibold text-sm">Student</p>
-                <p className="text-xs text-purple-300">View Profile</p>
+                <p className="font-semibold text-sm text-white">Student</p>
+                <p className="text-xs" style={{ color: '#888' }}>View Profile</p>
               </div>
             )}
           </Link>
         </div>
       </motion.div>
 
-      {/* Dynamic Spacer - Adjusts based on sidebar state */}
+      {/* Dynamic Spacer */}
       <div 
         className="transition-all duration-300" 
         style={{ marginLeft: isOpen ? '300px' : '20px' }}

@@ -110,7 +110,7 @@ const RoadmapNavigator = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 p-8">
+    <div className="min-h-screen p-8" style={{ background: '#ffffff' }}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -118,16 +118,16 @@ const RoadmapNavigator = () => {
       >
         {/* Header */}
         <div className="mb-8 text-center">
-          <h1 className="text-5xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-3">
-            🗺️ Career Roadmap Navigator
+          <h1 className="text-5xl font-bold mb-3" style={{ color: '#111' }}>
+            🗺️ Career Roadmap <span style={{ color: '#d4a800' }}>Navigator</span>
           </h1>
-          <p className="text-gray-600 text-lg">
+          <p className="text-lg" style={{ color: '#666' }}>
             Find your learning path with curated roadmaps from roadmap.sh
           </p>
         </div>
 
         {/* Search Bar */}
-        <div className="bg-white rounded-2xl shadow-xl p-6 mb-8">
+        <div className="rounded-2xl shadow-sm p-6 mb-8" style={{ background: '#fff', border: '1px solid #e5e5e5' }}>
           <div className="flex gap-4">
             <input
               type="text"
@@ -135,11 +135,15 @@ const RoadmapNavigator = () => {
               onChange={(e) => setSearchTerm(e.target.value)}
               onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
               placeholder="Enter role or skill (e.g., Frontend, Python, DevOps)..."
-              className="flex-1 px-6 py-4 border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all text-lg"
+              className="flex-1 px-6 py-4 border-2 rounded-lg transition-all text-lg focus:outline-none"
+              style={{ borderColor: '#e5e5e5', color: '#111' }}
+              onFocus={(e) => { e.target.style.borderColor = '#f5c518'; e.target.style.boxShadow = '0 0 0 2px rgba(245,197,24,0.15)'; }}
+              onBlur={(e) => { e.target.style.borderColor = '#e5e5e5'; e.target.style.boxShadow = 'none'; }}
             />
             <button
               onClick={handleSearch}
-              className="px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg font-semibold hover:shadow-lg transition-all"
+              className="px-8 py-4 rounded-lg font-semibold hover:shadow-lg transition-all"
+              style={{ background: 'linear-gradient(135deg, #f5c518, #d4a800)', color: '#0a0a0a' }}
             >
               Find Roadmap
             </button>
@@ -153,11 +157,11 @@ const RoadmapNavigator = () => {
               <button
                 key={category.id}
                 onClick={() => setSelectedCategory(category.id)}
-                className={`px-6 py-3 rounded-lg font-medium transition-all whitespace-nowrap ${
-                  selectedCategory === category.id
-                    ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg'
-                    : 'bg-white text-gray-700 hover:bg-gray-100'
-                }`}
+                className="px-6 py-3 rounded-lg font-medium transition-all whitespace-nowrap"
+              style={selectedCategory === category.id
+                ? { background: 'linear-gradient(135deg, #f5c518, #d4a800)', color: '#0a0a0a', boxShadow: '0 4px 12px rgba(245,197,24,0.3)' }
+                : { background: '#fff', color: '#555', border: '1px solid #e5e5e5' }
+              }
               >
                 {category.icon} {category.name}
               </button>
@@ -171,18 +175,19 @@ const RoadmapNavigator = () => {
             <motion.div
               key={url}
               whileHover={{ scale: 1.05 }}
-              className="bg-white rounded-xl shadow-lg p-6 cursor-pointer hover:shadow-2xl transition-all"
+              className="rounded-xl shadow-sm p-6 cursor-pointer hover:shadow-lg transition-all"
+              style={{ background: '#fff', border: '1px solid #e5e5e5' }}
               onClick={() => {
                 window.open(url, '_blank');
                 toast.success(`Opening ${description} roadmap!`);
               }}
             >
               <div className="text-5xl mb-4">{icon}</div>
-              <h3 className="text-xl font-bold mb-2">{description}</h3>
-              <span className="inline-block px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm capitalize">
+              <h3 className="text-xl font-bold mb-2" style={{ color: '#111' }}>{description}</h3>
+              <span className="inline-block px-3 py-1 rounded-full text-sm capitalize" style={{ background: '#fffbeb', color: '#92400e' }}>
                 {category}
               </span>
-              <div className="mt-4 flex items-center text-indigo-600 font-medium">
+              <div className="mt-4 flex items-center font-medium" style={{ color: '#d4a800' }}>
                 View Roadmap
                 <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -195,7 +200,7 @@ const RoadmapNavigator = () => {
         {uniqueRoadmaps.length === 0 && (
           <div className="text-center py-12">
             <div className="text-6xl mb-4">🔍</div>
-            <p className="text-gray-600 text-lg">No roadmaps found. Try a different search term.</p>
+            <p className="text-lg" style={{ color: '#999' }}>No roadmaps found. Try a different search term.</p>
           </div>
         )}
       </motion.div>

@@ -4,6 +4,7 @@ import json
 import os
 import uuid
 import httpx
+from dotenv import load_dotenv
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from resume_helper import *
@@ -20,9 +21,16 @@ import numpy as np
 nltk.download("punkt")
 nltk.download("stopwords")
 
-# Ollama Configuration
-OLLAMA_API_URL = "http://localhost:11434/api/generate"
-MODEL_NAME = "llama3.2:3b"
+# Load environment variables from .env file
+load_dotenv()
+
+# Ollama Configuration - Optimized for RTX 3050 GPU
+OLLAMA_API_URL = os.getenv("OLLAMA_API_URL", "http://localhost:11434/api/generate")
+MODEL_NAME = os.getenv("OLLAMA_MODEL", "llama3.2:3b")  # Faster model for RTX 3050
+
+# GPU Configuration
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"  # Use first GPU
+os.environ["OLLAMA_NUM_GPU"] = "999"      # Offload all layers to GPU
 
 async def query_ollama(prompt: str, stream: bool = False):
     """
@@ -44,7 +52,7 @@ async def query_ollama(prompt: str, stream: bool = False):
                     "prompt": prompt,
                     "stream": False,  # Set to False for now, can enable streaming later
                     "options": {
-                        "num_predict": 512,  # Limit response length for faster generation
+                        "num_predict": 150,  # Shorter responses for speed and conciseness
                         "temperature": 0.7,   # Balanced creativity
                         "top_p": 0.9,
                         "top_k": 40

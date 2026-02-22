@@ -118,10 +118,10 @@ const AddFace = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-900">
+      <div className="min-h-screen" style={{ background: '#ffffff' }}>
         
         <div className="flex justify-center items-center h-64">
-          <FaSpinner className="animate-spin text-4xl text-indigo-400" />
+          <FaSpinner className="animate-spin text-4xl" style={{ color: '#d4a800' }} />
         </div>
       </div>
     );
@@ -130,19 +130,19 @@ const AddFace = () => {
   return (
     <>
       
-      <div className="min-h-screen bg-gray-900 text-gray-100">
+      <div className="min-h-screen" style={{ background: '#ffffff', color: '#111' }}>
         <div className="container mx-auto px-4 py-8">
-          <div className="max-w-md mx-auto bg-gray-800 rounded-xl shadow-lg overflow-hidden p-6 border border-gray-700">
-            <h1 className="text-2xl font-bold text-white mb-6 text-center">
+          <div className="max-w-md mx-auto rounded-xl shadow-sm overflow-hidden p-6" style={{ background: '#fff', border: '1px solid #e5e5e5' }}>
+            <h1 className="text-2xl font-bold mb-6 text-center" style={{ color: '#111' }}>
               Face Registration
             </h1>
 
             {studentData?.uploaded ? (
               <div className="text-center py-8">
-                <div className="w-20 h-20 bg-green-900 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <FaCheck className="text-green-400 text-3xl" />
+                <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4" style={{ background: '#dcfce7' }}>
+                  <FaCheck className="text-3xl" style={{ color: '#16a34a' }} />
                 </div>
-                <h2 className="text-xl font-semibold text-white mb-2">
+                <h2 className="text-xl font-semibold mb-2" style={{ color: '#111' }}>
                   Face Already Registered
                 </h2>
                 <p className="text-gray-400">
@@ -151,10 +151,10 @@ const AddFace = () => {
               </div>
             ) : (
               <div className="text-center py-4">
-                <div className="w-20 h-20 bg-indigo-900 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <FaCamera className="text-indigo-400 text-3xl" />
+                <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4" style={{ background: '#fffbeb' }}>
+                  <FaCamera className="text-3xl" style={{ color: '#d4a800' }} />
                 </div>
-                <h2 className="text-xl font-semibold text-white mb-2">
+                <h2 className="text-xl font-semibold mb-2" style={{ color: '#111' }}>
                   Register Your Face
                 </h2>
                 <p className="text-gray-400 mb-6">
@@ -162,7 +162,8 @@ const AddFace = () => {
                 </p>
                 <button
                   onClick={startCamera}
-                  className="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-3 rounded-md flex items-center mx-auto"
+                  className="px-6 py-3 rounded-md flex items-center mx-auto"
+                  style={{ background: 'linear-gradient(135deg, #f5c518, #d4a800)', color: '#0a0a0a' }}
                 >
                   <FaUpload className="mr-2" /> Upload Face Image
                 </button>
@@ -174,8 +175,8 @@ const AddFace = () => {
         {/* Camera Modal */}
         {showCameraModal && (
           <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
-            <div className="bg-gray-800 rounded-lg p-6 w-full max-w-md">
-              <h2 className="text-xl font-bold mb-4">Capture Face Image</h2>
+            <div className="rounded-lg p-6 w-full max-w-md" style={{ background: '#fff', border: '1px solid #e5e5e5' }}>
+              <h2 className="text-xl font-bold mb-4" style={{ color: '#111' }}>Capture Face Image</h2>
 
               {!capturedImage ? (
                 <>
@@ -196,7 +197,8 @@ const AddFace = () => {
                   <div className="mt-4 flex justify-center">
                     <button
                       onClick={captureImage}
-                      className="bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-md flex items-center"
+                      className="px-4 py-2 rounded-md flex items-center"
+                      style={{ background: 'linear-gradient(135deg, #f5c518, #d4a800)', color: '#0a0a0a' }}
                     >
                       <FaCamera className="mr-2" /> Capture Image
                     </button>

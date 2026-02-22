@@ -1,3 +1,51 @@
 @import "tailwindcss";
+
+/* ===== PathNexusAI Professional Theme ===== */
+/* Palette: White bg, Black text, Yellow (#f5c518) accent */
+
+:root {
+  --color-primary: #f5c518;
+  --color-primary-dark: #d4a800;
+  --color-primary-light: #ffd84d;
+  --color-bg: #ffffff;
+  --color-bg-soft: #f8f8f8;
+  --color-bg-card: #ffffff;
+  --color-bg-elevated: #fafafa;
+  --color-border: #e5e5e5;
+  --color-border-hover: #d0d0d0;
+  --color-text-primary: #111111;
+  --color-text-secondary: #555555;
+  --color-text-muted: #999999;
+  --color-accent: #f5c518;
+}
+
+/* Global defaults */
+body {
+  background-color: #ffffff;
+  color: #111111;
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
 /* Sidebar spacing */
 .min-h-screen { padding-left: 0; }
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f5f5f5;
+}
+::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #f5c518;
+}
+
+/* Selection color */
+::selection {
+  background: rgba(245, 197, 24, 0.3);
+  color: #111111;
+}

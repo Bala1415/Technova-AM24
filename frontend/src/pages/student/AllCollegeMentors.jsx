@@ -145,7 +145,7 @@ const AllCollegeMentors = () => {
   return (
     <>
       
-      <div className="min-h-screen bg-gray-900 text-gray-100">
+      <div className="min-h-screen" style={{ background: '#ffffff', color: '#111' }}>
         <div className="container mx-auto px-4 py-8">
           {/* Search Bar */}
           <div className="flex justify-end mb-8 mt-[50px]">
@@ -155,7 +155,8 @@ const AllCollegeMentors = () => {
               </div>
               <input
                 type="text"
-                className="block w-full pl-10 pr-3 py-2 border border-gray-700 rounded-lg bg-gray-800 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className="block w-full pl-10 pr-3 py-2 border rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
+              style={{ background: '#fafafa', border: '1px solid #e5e5e5', color: '#111' }}
                 placeholder="Search by name, college, course or subjects..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -165,7 +166,7 @@ const AllCollegeMentors = () => {
 
           {loading ? (
             <div className="flex justify-center items-center h-64">
-              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500"></div>
+              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2" style={{ borderColor: '#f5c518' }}></div>
             </div>
           ) : filteredMentors.length === 0 ? (
             <div className="text-center py-12">
@@ -181,13 +182,15 @@ const AllCollegeMentors = () => {
               {filteredMentors?.map((mentor) => (
                 <div
                   key={mentor.id}
-                  className="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-700 hover:border-purple-500"
+                  className="rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300"
+                  style={{ background: '#fff', border: '1px solid #e5e5e5' }}
                 >
                   <div className="p-6">
                     <div className="flex items-center space-x-4 mb-4">
                       <div className="flex-shrink-0">
                         <img
-                          className="h-16 w-16 rounded-full object-cover border-2 border-purple-500"
+                          className="h-16 w-16 rounded-full object-cover border-2"
+                          style={{ borderColor: '#f5c518' }}
                           src={
                             mentor.image ||
                             "https://randomuser.me/api/portraits/lego/1.jpg"
@@ -196,10 +199,10 @@ const AllCollegeMentors = () => {
                         />
                       </div>
                       <div>
-                        <h3 className="text-lg font-bold text-white">
+                        <h3 className="text-lg font-bold" style={{ color: '#111' }}>
                           {mentor.name}
                         </h3>
-                        <p className="text-purple-400 flex items-center">
+                        <p className="flex items-center" style={{ color: '#d4a800' }}>
                           <FaGraduationCap className="mr-1" />
                           {mentor.degree}
                         </p>
@@ -208,7 +211,7 @@ const AllCollegeMentors = () => {
 
                     <div className="space-y-3">
                       <p className="flex items-center text-gray-300">
-                        <FaUniversity className="mr-2 text-purple-400" />
+                        <FaUniversity className="mr-2" style={{ color: '#d4a800' }} />
                         <span className="font-medium">College:</span>{" "}
                         <span className="ml-1 text-white">
                           Sri Vidya college of engineering and technology
@@ -216,17 +219,19 @@ const AllCollegeMentors = () => {
                       </p>
 
                       <p className="flex items-center text-gray-300">
-                        <MdLocationOn className="mr-2 text-purple-400" />
+                        <MdLocationOn className="mr-2" style={{ color: '#d4a800' }} />
                         <span className="font-medium">Year:</span>{" "}
                         <span className="ml-1 text-white">{mentor.year}</span>
                       </p>
                     </div>
 
-                    <div className="mt-6 pt-4 border-t border-gray-700 flex justify-between">
+                    <div className="mt-6 pt-4 flex justify-between" style={{ borderTop: '1px solid #e5e5e5' }}>
                       <div className="flex space-x-4">
                         <a
                           href={`mailto:${mentor.email}`}
-                          className="text-gray-400 hover:text-purple-400 transition-colors"
+                          className="transition-colors" style={{ color: '#999' }}
+                          onMouseOver={(e) => e.currentTarget.style.color = '#d4a800'}
+                          onMouseOut={(e) => e.currentTarget.style.color = '#999'}
                           title="Email"
                         >
                           <MdEmail className="text-xl" />
@@ -272,7 +277,7 @@ const AllCollegeMentors = () => {
                             className="text-gray-400 hover:text-purple-400 transition-colors flex items-center"
                             title="View Feedback"
                           >
-                            <span className="text-xs bg-purple-500 text-white rounded-full px-2 py-1">
+                            <span className="text-xs text-white rounded-full px-2 py-1" style={{ background: '#d4a800' }}>
                               {mentor.feedBack.length} feedback
                             </span>
                           </button>
@@ -295,14 +300,14 @@ const AllCollegeMentors = () => {
       </div>
       {feedbackModalOpen && (
         <div className="fixed inset-0 backdrop-blur-md bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-gray-800 rounded-xl max-w-md w-full p-6 relative">
+          <div className="rounded-xl max-w-md w-full p-6 relative" style={{ background: '#fff', border: '1px solid #e5e5e5' }}>
             <button
               onClick={closeFeedbackModal}
               className="absolute top-4 right-4 text-gray-400 hover:text-white"
             >
               <MdClose className="text-xl" />
             </button>
-            <h3 className="text-xl font-bold mb-4 flex items-center text-white">
+            <h3 className="text-xl font-bold mb-4 flex items-center" style={{ color: '#111' }}>
               <FaCommentAlt className="mr-2 text-yellow-400" />
               Feedback for {selectedMentor?.name}
             </h3>
@@ -322,7 +327,8 @@ const AllCollegeMentors = () => {
             <div className="mb-4">
               <label className="block text-gray-300 mb-2">Your Feedback</label>
               <textarea
-                className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 text-gray-100"
+                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                style={{ background: '#fafafa', border: '1px solid #e5e5e5', color: '#111' }}
                 rows="5"
                 value={feedbackText}
                 onChange={(e) => setFeedbackText(e.target.value)}
@@ -333,14 +339,15 @@ const AllCollegeMentors = () => {
             <div className="flex justify-end space-x-3">
               <button
                 onClick={closeFeedbackModal}
-                className="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors"
+                className="px-4 py-2 rounded-lg transition-colors" style={{ background: '#f5f5f5', color: '#555' }}
                 disabled={feedbackLoading}
               >
                 Cancel
               </button>
               <button
                 onClick={submitFeedback}
-                className="px-4 py-2 bg-yellow-600 hover:bg-yellow-500 rounded-lg flex items-center transition-colors"
+                className="px-4 py-2 rounded-lg flex items-center transition-colors"
+                style={{ background: 'linear-gradient(135deg, #f5c518, #d4a800)', color: '#0a0a0a' }}
                 disabled={feedbackLoading}
               >
                 {feedbackLoading ? (
@@ -379,7 +386,7 @@ const AllCollegeMentors = () => {
       {/* View Feedback Modal */}
       {viewFeedbackModalOpen && (
         <div className="fixed inset-0 backdrop-blur-md bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-gray-800 rounded-xl max-w-2xl w-full p-6 relative">
+          <div className="rounded-xl max-w-2xl w-full p-6 relative" style={{ background: '#fff', border: '1px solid #e5e5e5' }}>
             <button
               onClick={closeViewFeedbackModal}
               className="absolute top-4 right-4 text-gray-400 hover:text-white"
@@ -388,7 +395,8 @@ const AllCollegeMentors = () => {
             </button>
             <div className="flex items-center mb-6">
               <img
-                className="h-16 w-16 rounded-full object-cover border-2 border-purple-500 mr-4"
+                className="h-16 w-16 rounded-full object-cover border-2 mr-4"
+                style={{ borderColor: '#f5c518' }}
                 src={
                   selectedMentor?.image ||
                   "https://randomuser.me/api/portraits/lego/1.jpg"
@@ -396,10 +404,10 @@ const AllCollegeMentors = () => {
                 alt={selectedMentor?.name}
               />
               <div>
-                <h3 className="text-2xl font-bold text-white">
+                <h3 className="text-2xl font-bold" style={{ color: '#111' }}>
                   {selectedMentor?.name}
                 </h3>
-                <p className="text-purple-400">{selectedMentor?.title}</p>
+                <p style={{ color: '#d4a800' }}>{selectedMentor?.title}</p>
                 <p className="text-gray-400 text-sm mt-1">
                   {selectedMentor?.feedBack?.length || 0} feedback comments
                 </p>
@@ -411,14 +419,14 @@ const AllCollegeMentors = () => {
                 selectedMentor.feedBack.map((feedback, index) => (
                   <div
                     key={index}
-                    className="bg-gray-700 rounded-lg p-4 shadow-md"
+                    className="rounded-lg p-4 shadow-sm" style={{ background: '#fafafa', border: '1px solid #e5e5e5' }}
                   >
                     <div className="flex justify-between items-start mb-2">
                       <div className="flex items-center">
-                        <div className="h-8 w-8 rounded-full bg-purple-500 flex items-center justify-center text-white font-bold mr-3">
+                        <div className="h-8 w-8 rounded-full flex items-center justify-center font-bold mr-3" style={{ background: '#d4a800', color: '#fff' }}>
                           {feedback.by.charAt(0).toUpperCase()}
                         </div>
-                        <h4 className="font-medium text-white">
+                        <h4 className="font-medium" style={{ color: '#111' }}>
                           {feedback.by}
                         </h4>
                       </div>
@@ -453,7 +461,7 @@ const AllCollegeMentors = () => {
             <div className="mt-6 flex justify-between items-center">
               <button
                 onClick={closeViewFeedbackModal}
-                className="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors"
+                className="px-4 py-2 rounded-lg transition-colors" style={{ background: '#f5f5f5', color: '#555' }}
               >
                 Close
               </button>

@@ -3,16 +3,18 @@ import textwrap
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from fastapi.responses import HTMLResponse
-from google.generativeai import GenerativeModel, configure
-from IPython.display import Markdown
+from google import genai
+from google.genai import types
+from dotenv import load_dotenv
 from fastapi.middleware.cors import CORSMiddleware
 
-# Securely load API key (consider storing this as an environment variable)
-GOOGLE_API_KEY = "AIzaSyALQl3IlQPXT_dD8k5kvBA9j3aXenmfDAg"
-configure(api_key=GOOGLE_API_KEY)
+# Load environment variables
+load_dotenv()
 
-# Initialize the generative model
-model = GenerativeModel('gemini-2.5-flash')
+# Configure the new Google GenAI client
+client = genai.Client(api_key=os.getenv("GEMINI_API_KEY", ""))
+
+MODEL_NAME = "gemini-2.0-flash"
 
 # Markdown formatter
 def to_markdown(text):
@@ -24,10 +26,10 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Frontend origin
+    allow_origins=["*"],
     allow_credentials=True,
-    allow_methods=["*"],  # Allow all methods
-    allow_headers=["*"],  # Allow all headers
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # Pydantic model for request body
@@ -78,7 +80,10 @@ async def generate_content(request: ContentRequest):
     """
 
     try:
-        response = model.generate_content(prompt)
+        response = client.models.generate_content(
+            model=MODEL_NAME,
+            contents=prompt,
+        )
         return {"generated_content": response.text}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

@@ -207,7 +207,7 @@ const StudentChatroom = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 p-8">
+    <div className="min-h-screen p-8" style={{ background: '#ffffff' }}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -215,28 +215,28 @@ const StudentChatroom = () => {
       >
         {/* Header */}
         <div className="mb-6">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
-            💬 Student Chatroom
+          <h1 className="text-4xl font-bold mb-2" style={{ color: '#111' }}>
+            💬 Student <span style={{ color: '#d4a800' }}>Chatroom</span>
           </h1>
-          <p className="text-gray-600">Connect with fellow students • {onlineUsers.length} online</p>
+          <p style={{ color: '#666' }}>Connect with fellow students • {onlineUsers.length} online</p>
         </div>
 
         <div className="grid lg:grid-cols-4 gap-6">
           {/* Online Users Sidebar */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-2xl shadow-xl p-6">
-              <h2 className="text-xl font-bold mb-4 flex items-center">
+            <div className="rounded-2xl shadow-sm p-6" style={{ background: '#fff', border: '1px solid #e5e5e5' }}>
+              <h2 className="text-xl font-bold mb-4 flex items-center" style={{ color: '#111' }}>
                 <span className="w-3 h-3 bg-green-500 rounded-full mr-2 animate-pulse"></span>
                 Online ({onlineUsers.length})
               </h2>
               <div className="space-y-3">
                 {onlineUsers.map((user, index) => (
-                  <div key={index} className="flex items-center space-x-3 p-2 hover:bg-gray-50 rounded-lg">
-                    <div className="w-10 h-10 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full flex items-center justify-center text-white font-bold">
+                  <div key={index} className="flex items-center space-x-3 p-2 rounded-lg" style={{ ':hover': { background: '#fafafa' } }}>
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center font-bold" style={{ background: 'linear-gradient(135deg, #f5c518, #d4a800)', color: '#0a0a0a' }}>
                       {user.userName?.charAt(0) || 'S'}
                     </div>
                     <div className="flex-1">
-                      <p className="font-medium text-sm">{user.userName}</p>
+                      <p className="font-medium text-sm" style={{ color: '#111' }}>{user.userName}</p>
                       <p className="text-xs text-green-600">● Online</p>
                     </div>
                   </div>
@@ -295,14 +295,15 @@ const StudentChatroom = () => {
             )}
 
             {/* Chat Messages */}
-            <div className="bg-white rounded-2xl shadow-xl flex flex-col" style={{ height: '600px' }}>
+            <div className="rounded-2xl shadow-sm flex flex-col" style={{ height: '600px', background: '#fff', border: '1px solid #e5e5e5' }}>
               {/* Chat Header */}
-              <div className="p-4 border-b flex justify-between items-center">
-                <h2 className="text-xl font-bold">Group Chat</h2>
+              <div className="p-4 flex justify-between items-center" style={{ borderBottom: '1px solid #e5e5e5' }}>
+                <h2 className="text-xl font-bold" style={{ color: '#111' }}>Group Chat</h2>
                 {!isVideoCall && (
                   <button
                     onClick={startVideoCall}
-                    className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-lg font-semibold hover:shadow-lg transition-all"
+                    className="px-4 py-2 rounded-lg font-semibold hover:shadow-lg transition-all"
+                    style={{ background: 'linear-gradient(135deg, #f5c518, #d4a800)', color: '#0a0a0a' }}
                   >
                     📹 Start Video Call
                   </button>
@@ -317,11 +318,11 @@ const StudentChatroom = () => {
                     className={`flex ${msg.userId === userId ? 'justify-end' : 'justify-start'}`}
                   >
                     <div
-                      className={`max-w-md rounded-2xl px-4 py-3 ${
-                        msg.userId === userId
-                          ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white'
-                          : 'bg-gray-100 text-gray-800'
-                      }`}
+                      className="max-w-md rounded-2xl px-4 py-3"
+                      style={msg.userId === userId
+                        ? { background: 'linear-gradient(135deg, #f5c518, #d4a800)', color: '#0a0a0a', borderBottomRightRadius: 0 }
+                        : { background: '#fafafa', color: '#333', border: '1px solid #e5e5e5', borderBottomLeftRadius: 0 }
+                      }
                     >
                       {msg.userId !== userId && (
                         <p className="text-xs font-semibold mb-1 opacity-70">{msg.userName}</p>
@@ -337,18 +338,22 @@ const StudentChatroom = () => {
               </div>
 
               {/* Input */}
-              <form onSubmit={sendMessage} className="p-4 border-t">
+              <form onSubmit={sendMessage} className="p-4" style={{ borderTop: '1px solid #e5e5e5' }}>
                 <div className="flex gap-3">
                   <input
                     type="text"
                     value={inputMessage}
                     onChange={(e) => setInputMessage(e.target.value)}
                     placeholder="Type your message..."
-                    className="flex-1 px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all"
+                    className="flex-1 px-4 py-3 border-2 rounded-lg transition-all focus:outline-none"
+                    style={{ borderColor: '#e5e5e5', color: '#111' }}
+                    onFocus={(e) => { e.target.style.borderColor = '#f5c518'; e.target.style.boxShadow = '0 0 0 2px rgba(245,197,24,0.15)'; }}
+                    onBlur={(e) => { e.target.style.borderColor = '#e5e5e5'; e.target.style.boxShadow = 'none'; }}
                   />
                   <button
                     type="submit"
-                    className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition-all"
+                    className="px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition-all"
+                    style={{ background: 'linear-gradient(135deg, #f5c518, #d4a800)', color: '#0a0a0a' }}
                   >
                     Send
                   </button>
