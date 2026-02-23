@@ -119,7 +119,7 @@ const Chatbot = () => {
       const response = await fetch("http://localhost:11434/api/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ model: "llama3.1:8b", prompt: text, stream: false }),
+        body: JSON.stringify({ model: "llama3.2:3b", prompt: text, stream: false }),
       });
       if (!response.ok) throw new Error("Ollama error");
       const data = await response.json();
@@ -156,7 +156,7 @@ const Chatbot = () => {
         const response = await fetch("http://localhost:11434/api/generate", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ model: "llama3.1:8b", prompt: `Analyze this file and summarize:\n\n${fileContent.substring(0, 2000)}`, stream: false }),
+          body: JSON.stringify({ model: "llama3.2:3b", prompt: `Analyze this file and summarize:\n\n${fileContent.substring(0, 2000)}`, stream: false }),
         });
         if (!response.ok) throw new Error("Ollama error");
         const data = await response.json();
@@ -181,7 +181,7 @@ const Chatbot = () => {
       const response = await fetch("http://localhost:11434/api/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ model: "llama3.1:8b", prompt: userMessage.text, stream: false }),
+        body: JSON.stringify({ model: "llama3.2:3b", prompt: userMessage.text, stream: false }),
       });
       if (!response.ok) throw new Error("Ollama error");
       const data = await response.json();

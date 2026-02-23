@@ -49,7 +49,7 @@ const QuizPage = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          model: "llama3.1:8b",
+          model: "llama3.2:3b",
           prompt: prompt,
           stream: false,
           format: "json",
@@ -59,7 +59,7 @@ const QuizPage = () => {
 
       if (!response.ok) {
         if (response.status === 404) {
-          throw new Error("Ollama model 'llama3.1:8b' not found. Please run: ollama pull llama3.1:8b");
+          throw new Error("Ollama model 'llama3.2:3b' not found. Please run: ollama pull llama3.2:3b");
         }
         throw new Error(`Ollama error (${response.status}): ${response.statusText}`);
       }

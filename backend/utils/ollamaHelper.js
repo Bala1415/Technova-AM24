@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 const OLLAMA_API_URL = 'http://localhost:11434/api/generate';
-const MODEL_NAME = 'llama3.1:8b';
+const MODEL_NAME = 'llama3.2:3b';
 
 /**
  * Query Ollama LLM with a prompt
