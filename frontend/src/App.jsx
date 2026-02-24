@@ -30,6 +30,7 @@ import Sidebar from "./components/Sidebar";
 import ResumeAnalyzer from "./pages/ats/ResumeAnalyzer";
 import ResumeBuilder from "./pages/ats/ResumeBuilder";
 import ExamPreparation from "./pages/student/ExamPreparation";
+import AIInterview from "./pages/student/AIInterview";
 
 
 const App = () => {
@@ -46,8 +47,9 @@ const App = () => {
           <Route path="/chat" element={<Chat />} />
           <Route path="/college-chats" element={<CollegeChats />} />
           <Route path="/ind-chats" element={<IndChats />} />
-          <Route path="/psycho-chats" element={<PsychoChats/>} />
+          <Route path="/psycho-chats" element={<PsychoChats />} />
           <Route path="/recommendSkills" element={<RecommendSkills />} />
+          <Route path="/ai-interview" element={<AIInterview />} />
           <Route path="/ats" element={<ResumeScore />} />
           <Route path="/allCollegeMentors" element={<AllCollegeMentors />} />
           <Route path="/allIndustryMentors" element={<AllIndustryMentors />} />
@@ -57,17 +59,16 @@ const App = () => {
           <Route path="/addFace" element={<AddFace />} />
           <Route path="/collegeFeedback" element={<CollegeFeedBack />} />
           <Route path="/indFeedback" element={<IndFeedBack />} />
-          <Route path="/Quiz" element={<Quiz/>} />
-          <Route path="/certification" element={<Certification/>} />
-          <Route path="/career-simulator" element={<CareerSimulator/>} />
-          <Route path="/wellness" element={<WellnessDashboard/>} />
-          <Route path="/ai-assessment" element={<AISkillsAssessment/>} />
-          <Route path="/roadmap" element={<RoadmapNavigator/>} />
-          <Route path="/roadmap" element={<RoadmapNavigator/>} />
-          <Route path="/chatroom" element={<StudentChatroom/>} />
-          <Route path="/resume-analyzer" element={<ResumeAnalyzer/>} />
-          <Route path="/resume-builder" element={<ResumeBuilder/>} />
-          <Route path="/exam-prep" element={<ExamPreparation/>} />
+          <Route path="/Quiz" element={<Quiz />} />
+          <Route path="/certification" element={<Certification />} />
+          <Route path="/career-simulator" element={<CareerSimulator />} />
+          <Route path="/wellness" element={<WellnessDashboard />} />
+          <Route path="/ai-assessment" element={<AISkillsAssessment />} />
+          <Route path="/roadmap" element={<RoadmapNavigator />} />
+          <Route path="/chatroom" element={<StudentChatroom />} />
+          <Route path="/resume-analyzer" element={<ResumeAnalyzer />} />
+          <Route path="/resume-builder" element={<ResumeBuilder />} />
+          <Route path="/exam-prep" element={<ExamPreparation />} />
 
         </Routes>
       </BrowserRouter>

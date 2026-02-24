@@ -211,10 +211,9 @@ const Register = () => {
       {/* Footer */}
       <footer className="absolute bottom-4 w-full text-center text-sm opacity-80" style={{ color: '#999' }}>
         © 2025{" "}
-        <span className="font-semibold" style={{ color: '#d4a800' }}>Balavignesh</span> ·{" "}
-        <span className="font-semibold" style={{ color: '#333' }}>Kavirajan</span> ·{" "}
-        <span className="font-semibold" style={{ color: '#333' }}>Mukesh N</span> ·{" "}
-        <span className="font-semibold" style={{ color: '#333' }}>Iniya</span> — All Rights Reserved
+        <span className="font-semibold" style={{ color: '#d4a800' }}>PAVITHRAN</span> ·{" "}
+        <span className="font-semibold" style={{ color: '#333' }}>JEYA PRAKASH</span> ·{" "}
+        <span className="font-semibold" style={{ color: '#333' }}>AATHIVEL</span> — All Rights Reserved
       </footer>
     </div>
   );

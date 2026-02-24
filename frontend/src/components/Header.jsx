@@ -31,60 +31,88 @@ const Header = () => {
 
   const renderStudentLinks = () => (
     <>
-      <Link to="/allIndustryMentors" className={linkHoverClass} style={linkStyle}
+      <Link to="/exam-prep" className={linkHoverClass} style={linkStyle}
         onMouseEnter={(e) => { e.currentTarget.style.color = '#d4a800'; }}
         onMouseLeave={(e) => { e.currentTarget.style.color = '#333'; }}>
-        <FiBriefcase className="mr-1" /> Industry Mentors
-      </Link>
-      <Link to="/allCollegeMentors" className={linkHoverClass} style={linkStyle}
-        onMouseEnter={(e) => { e.currentTarget.style.color = '#d4a800'; }}
-        onMouseLeave={(e) => { e.currentTarget.style.color = '#333'; }}>
-        <RiUserStarLine className="mr-1" /> College Mentors
-      </Link>
-      <Link to="/chat" className={linkHoverClass} style={linkStyle}
-        onMouseEnter={(e) => { e.currentTarget.style.color = '#d4a800'; }}
-        onMouseLeave={(e) => { e.currentTarget.style.color = '#333'; }}>
-        <AiOutlineMessage className="mr-1" /> Chat
+        <AiOutlineSolution className="mr-1" /> Exam Prep
       </Link>
       <Link to="/chatbot" className={linkHoverClass} style={linkStyle}
         onMouseEnter={(e) => { e.currentTarget.style.color = '#d4a800'; }}
         onMouseLeave={(e) => { e.currentTarget.style.color = '#333'; }}>
-        <AiOutlineRobot className="mr-1" /> Chatbot
+        <AiOutlineRobot className="mr-1" /> AI Chatbot
+      </Link>
+      <Link to="/roadmap" className={linkHoverClass} style={linkStyle}
+        onMouseEnter={(e) => { e.currentTarget.style.color = '#d4a800'; }}
+        onMouseLeave={(e) => { e.currentTarget.style.color = '#333'; }}>
+        <AiOutlineSolution className="mr-1" /> Roadmap Navigator
       </Link>
       <Link to="/career" className={linkHoverClass} style={linkStyle}
         onMouseEnter={(e) => { e.currentTarget.style.color = '#d4a800'; }}
         onMouseLeave={(e) => { e.currentTarget.style.color = '#333'; }}>
         <AiOutlineBulb className="mr-1" /> Career Guidance
       </Link>
+      <Link to="/career-simulator" className={linkHoverClass} style={linkStyle}
+        onMouseEnter={(e) => { e.currentTarget.style.color = '#d4a800'; }}
+        onMouseLeave={(e) => { e.currentTarget.style.color = '#333'; }}>
+        <AiOutlineSolution className="mr-1" /> Career Simulator
+      </Link>
       <Link to="/recommendSkills" className={linkHoverClass} style={linkStyle}
         onMouseEnter={(e) => { e.currentTarget.style.color = '#d4a800'; }}
         onMouseLeave={(e) => { e.currentTarget.style.color = '#333'; }}>
-        <AiOutlineFileText className="mr-1" /> Recommend Skills
+        <AiOutlineFileText className="mr-1" /> Skill
+      </Link>
+      <Link to="/ai-interview" className={linkHoverClass} style={linkStyle}
+        onMouseEnter={(e) => { e.currentTarget.style.color = '#d4a800'; }}
+        onMouseLeave={(e) => { e.currentTarget.style.color = '#333'; }}>
+        <AiOutlineSolution className="mr-1" /> AI Interview
       </Link>
       <Link to="/ats" className={linkHoverClass} style={linkStyle}
         onMouseEnter={(e) => { e.currentTarget.style.color = '#d4a800'; }}
         onMouseLeave={(e) => { e.currentTarget.style.color = '#333'; }}>
-        <AiOutlineSolution className="mr-1" /> ATS
-      </Link>
-      <Link to="/allTask" className={linkHoverClass} style={linkStyle}
-        onMouseEnter={(e) => { e.currentTarget.style.color = '#d4a800'; }}
-        onMouseLeave={(e) => { e.currentTarget.style.color = '#333'; }}>
-        <AiOutlineSolution className="mr-1" /> All Tasks
-      </Link>
-      <Link to="/Quiz" className={linkHoverClass} style={linkStyle}
-        onMouseEnter={(e) => { e.currentTarget.style.color = '#d4a800'; }}
-        onMouseLeave={(e) => { e.currentTarget.style.color = '#333'; }}>
-        <AiOutlineSolution className="mr-1" /> AI-Quiz
+        <AiOutlineSolution className="mr-1" /> Resume Scoring
       </Link>
       <Link to="/certification" className={linkHoverClass} style={linkStyle}
         onMouseEnter={(e) => { e.currentTarget.style.color = '#d4a800'; }}
         onMouseLeave={(e) => { e.currentTarget.style.color = '#333'; }}>
-        <AiOutlineSolution className="mr-1" /> Certification-Spoof
+        <AiOutlineSolution className="mr-1" /> Certificate Verification
       </Link>
-      <Link to="/profile" className={linkHoverClass} style={linkStyle}
+
+      {/* Mentors - Flat in mobile menu for simplicity */}
+      <Link to="/allCollegeMentors" className={linkHoverClass} style={linkStyle}
         onMouseEnter={(e) => { e.currentTarget.style.color = '#d4a800'; }}
         onMouseLeave={(e) => { e.currentTarget.style.color = '#333'; }}>
-        <AiOutlineSolution className="mr-1" /> Profile
+        <RiUserStarLine className="mr-1" /> College Mentors
+      </Link>
+      <Link to="/allIndustryMentors" className={linkHoverClass} style={linkStyle}
+        onMouseEnter={(e) => { e.currentTarget.style.color = '#d4a800'; }}
+        onMouseLeave={(e) => { e.currentTarget.style.color = '#333'; }}>
+        <FiBriefcase className="mr-1" /> Industry Mentors
+      </Link>
+
+      <Link to="/chat" className={linkHoverClass} style={linkStyle}
+        onMouseEnter={(e) => { e.currentTarget.style.color = '#d4a800'; }}
+        onMouseLeave={(e) => { e.currentTarget.style.color = '#333'; }}>
+        <AiOutlineMessage className="mr-1" /> Mentor Chat
+      </Link>
+      <Link to="/chatroom" className={linkHoverClass} style={linkStyle}
+        onMouseEnter={(e) => { e.currentTarget.style.color = '#d4a800'; }}
+        onMouseLeave={(e) => { e.currentTarget.style.color = '#333'; }}>
+        <AiOutlineMessage className="mr-1" /> Student Room
+      </Link>
+      <Link to="/wellness" className={linkHoverClass} style={linkStyle}
+        onMouseEnter={(e) => { e.currentTarget.style.color = '#d4a800'; }}
+        onMouseLeave={(e) => { e.currentTarget.style.color = '#333'; }}>
+        <AiOutlineSolution className="mr-1" /> Wellness
+      </Link>
+      <Link to="/Quiz" className={linkHoverClass} style={linkStyle}
+        onMouseEnter={(e) => { e.currentTarget.style.color = '#d4a800'; }}
+        onMouseLeave={(e) => { e.currentTarget.style.color = '#333'; }}>
+        <AiOutlineSolution className="mr-1" /> Quiz
+      </Link>
+      <Link to="/ai-assessment" className={linkHoverClass} style={linkStyle}
+        onMouseEnter={(e) => { e.currentTarget.style.color = '#d4a800'; }}
+        onMouseLeave={(e) => { e.currentTarget.style.color = '#333'; }}>
+        <AiOutlineSolution className="mr-1" /> AI Assessment
       </Link>
     </>
   );
